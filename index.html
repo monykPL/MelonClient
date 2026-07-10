@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" href="favicon.png">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Melon Client - Nowoczesny Launcher Minecraft</title>
     <style>
@@ -216,7 +215,6 @@
             transform: translateY(-2px);
         }
 
-        /* Sekcja Galerii */
         .gallery-section {
             max-width: 1000px;
             margin: 2rem auto 4rem;
@@ -464,12 +462,7 @@
         window.addEventListener('click', (e) => { if (e.target === modal) { modal.style.display = 'none'; } });
 
         submitDownloadBtn.addEventListener('click', () => {
-            const selectedArch = document.querySelector('input[name="system-arch"]:checked').value;
-            let finalDownloadUrl = 'https://github.com/monykPL/MelonClient/releases';
-
-            window.open(finalDownloadUrl, '_blank');
             modal.style.display = 'none';
-            
             window.location.href = './dziekujeinfo/';
         });
     </script>
