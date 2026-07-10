@@ -2,9 +2,11 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <!-- Ikonka na karcie przeglądarki (Favicon) -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Melon Client - Nowoczesny Launcher Minecraft</title>
-    <!-- Import czcionki w stylu Minecraft z Google Fonts -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
@@ -34,14 +36,14 @@
             overflow-x: hidden;
         }
 
-        /* Przypięta Nawigacja ze zdjęciem image_42a2f0.png z szarą linią */
+        /* Przypięta Nawigacja */
         header {
             position: sticky;
             top: 0;
             background-color: rgba(17, 18, 19, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid #2d3034; /* Szara linia odcinająca */
+            border-bottom: 1px solid #2d3034;
             z-index: 100;
         }
 
@@ -61,7 +63,14 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+        }
+
+        /* Styl dla małego logo w nawigacji */
+        .logo img {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
         }
 
         .logo span {
@@ -85,7 +94,6 @@
             color: var(--text-main);
         }
 
-        /* Nowy przycisk pobierania na pasku zadań */
         .btn-nav-download {
             background-color: var(--accent-color);
             color: #000000 !important;
@@ -101,7 +109,7 @@
             transform: translateY(-1px);
         }
 
-        /* Sekcja Główna (Hero na bazie image_42a3a8.png) */
+        /* Sekcja Główna */
         .hero {
             text-align: center;
             padding: 4rem 1rem 3rem;
@@ -110,27 +118,26 @@
         }
 
         /* Duże pole na logo launchera */
-        .large-logo-slot {
+        .large-logo-container {
             width: 160px;
             height: 160px;
             margin: 0 auto 1.5rem;
-            border: 2px dashed #3a3f44;
-            border-radius: 24px;
-            background-color: var(--card-bg);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            font-weight: 600;
+        }
+
+        .large-logo-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
 
         /* Kontener tekstu Minecraft */
         .minecraft-text-container {
             font-family: 'Press Start 2P', monospace;
             font-size: 1rem;
-            color: #ffaa00; /* Złoty kolor Minecraft */
+            color: #ffaa00;
             text-shadow: 2px 2px 0px #3f2a00;
             margin-bottom: 2.5rem;
             display: flex;
@@ -143,7 +150,6 @@
             color: #ffaa00;
         }
 
-        /* Maszyna rotująca napisy (efekt spadania) */
         .minecraft-rotator {
             height: 30px;
             overflow: hidden;
@@ -160,37 +166,21 @@
             transform: translateY(-40px);
             animation: dropWord 12s infinite ease-in-out;
             text-align: center;
-            color: #ffffff; /* Słowa cech mogą być białe lub też złote, domyślnie białe dla kontrastu */
+            color: #ffffff;
             text-shadow: 2px 2px 0px #222;
         }
 
-        /* Opóźnienia dla 4 haseł (każde co 3 sekundy w cyklu 12s) */
         .minecraft-rotator .word:nth-child(1) { animation-delay: 0s; }
         .minecraft-rotator .word:nth-child(2) { animation-delay: 3s; }
         .minecraft-rotator .word:nth-child(3) { animation-delay: 6s; }
         .minecraft-rotator .word:nth-child(4) { animation-delay: 9s; }
 
         @keyframes dropWord {
-            0% {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            4% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            21% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            25% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
+            0% { opacity: 0; transform: translateY(-30px); }
+            4% { opacity: 1; transform: translateY(0); }
+            21% { opacity: 1; transform: translateY(0); }
+            25% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 0; transform: translateY(30px); }
         }
 
         .hero h1 {
@@ -224,7 +214,7 @@
             transform: translateY(-2px);
         }
 
-        /* Sekcja Galerii (Efekt 3D i najechania) */
+        /* Sekcja Galerii */
         .gallery-section {
             max-width: 1000px;
             margin: 2rem auto 4rem;
@@ -242,20 +232,17 @@
             width: 55%;
             height: 340px;
             background-color: var(--card-bg);
-            border: 2px dashed #3a3f44;
             border-radius: 12px;
-            display: table;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), z-index 0.4s, opacity 0.4s, border-color 0.4s;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), z-index 0.4s, opacity 0.4s, border 0.4s;
+            overflow: hidden;
         }
 
-        .screenshot-slot span {
-            display: table-cell;
-            vertical-align: middle;
-            text-align: center;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 1.1rem;
+        .screenshot-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         /* Główne zdjęcie (na środku, na wierzchu) */
@@ -273,6 +260,7 @@
             z-index: 1;
             opacity: 0.6;
             transform: scale(0.9);
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Prawe zdjęcie (z tyłu) */
@@ -282,9 +270,10 @@
             z-index: 2;
             opacity: 0.6;
             transform: scale(0.9);
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Efekt po najechaniu myszką - wyciąganie na sam wierzch */
+        /* Efekt po najechaniu myszką */
         .screenshot-slot:hover {
             z-index: 10 !important;
             opacity: 1 !important;
@@ -296,7 +285,7 @@
         .slot-2:hover { transform: scale(1.03) !important; }
         .slot-3:hover { transform: scale(1.03) !important; }
 
-        /* Sekcja Funkcji (Grid) */
+        /* Sekcja Funkcji */
         .features {
             max-width: 1200px;
             margin: 0 auto;
@@ -340,7 +329,7 @@
             margin-top: 3rem;
         }
 
-        /* Responsywność dla telefonów */
+        /* Responsywność */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
             .header-container { flex-direction: column; gap: 1rem; }
@@ -369,10 +358,14 @@
 </head>
 <body>
 
-    <!-- PASEK NAWIGACJI (Zainspirowany image_42a2f0.png - leci za ekranem + szara linia) -->
+    <!-- PASEK NAWIGACJI -->
     <header>
         <div class="header-container">
-            <a href="#" class="logo">🍉 Melon<span>Client</span></a>
+            <!-- Tutaj podmieniliśmy arbuza na małe logo -->
+            <a href="#" class="logo">
+                <img src="logo-small.png" alt="Melon Client Logo">
+                Melon<span>Client</span>
+            </a>
             <nav>
                 <a href="#features">Funkcje</a>
                 <a href="https://github.com/monykPL/MelonClient/" target="_blank">GitHub</a>
@@ -382,13 +375,12 @@
     </header>
 
     <main>
-        <!-- SEKCJA HERO (Zainspirowana image_42a3a8.png z nowościami) -->
+        <!-- SEKCJA HERO -->
         <section class="hero">
             
-            <!-- Duże pole na Twoje Logo -->
-            <div class="large-logo-slot">
-                <!-- Gdy będziesz miał logo, zamień poniższy tekst na tag <img src="twoje_logo.png" style="max-width:100%"> -->
-                <span>[ Miejsce na Logo ]</span>
+            <!-- Duże logo launchera -->
+            <div class="large-logo-container">
+                <img src="logo.png" alt="Melon Client Logo Duże">
             </div>
 
             <!-- Animowany Złoty Napis Minecraft -->
@@ -407,22 +399,22 @@
             <a href="https://github.com/monykPL/MelonClient/releases" target="_blank" class="btn-download">Pobierz Launcher</a>
         </section>
 
-        <!-- SEKCJA ZDJĘĆ Z EFEKTEM NAJECHANIA (3D HOVER) -->
+        <!-- SEKCJA ZDJĘĆ Z ELEGANCKIM EFEKTEM (3D HOVER) -->
         <section class="gallery-section">
             <div class="gallery-container">
-                <!-- Zdjęcie 2 (Z tyłu po lewej) -->
+                <!-- Zdjęcie 2 (W tle po lewej) -->
                 <div class="screenshot-slot slot-2">
-                    <span>[ Miejsce na zdjęcie 2 ]</span>
+                    <img src="screen2.png" alt="Zrzut ekranu 2">
                 </div>
                 
-                <!-- Zdjęcie 3 (Z tyłu po prawej) -->
+                <!-- Zdjęcie 3 (W tle po prawej) -->
                 <div class="screenshot-slot slot-3">
-                    <span>[ Miejsce na zdjęcie 3 ]</span>
+                    <img src="screen3.png" alt="Zrzut ekranu 3">
                 </div>
 
                 <!-- Zdjęcie 1 (Z przodu na środku) -->
                 <div class="screenshot-slot slot-1">
-                    <span>[ Główne zdjęcie 1 ]</span>
+                    <img src="screen1.png" alt="Główny zrzut ekranu 1">
                 </div>
             </div>
         </section>
