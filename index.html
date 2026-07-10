@@ -34,7 +34,6 @@
             overflow-x: hidden;
         }
 
-        /* Przypięta Nawigacja */
         header {
             position: sticky;
             top: 0;
@@ -93,6 +92,8 @@
 
         .open-modal-btn {
             cursor: pointer;
+            border: none;
+            font-family: var(--font-family);
         }
 
         .btn-nav-download {
@@ -215,6 +216,7 @@
             transform: translateY(-2px);
         }
 
+        /* Sekcja Galerii */
         .gallery-section {
             max-width: 1000px;
             margin: 2rem auto 4rem;
@@ -317,10 +319,8 @@
             font-size: 1.8rem;
             color: var(--text-muted);
             cursor: pointer;
-            transition: color 0.2s;
         }
 
-        .modal-close:hover { color: var(--text-main); }
         .modal-box h2 { font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: 700; }
 
         .arch-container {
@@ -355,28 +355,6 @@
             background-color: var(--card-hover);
         }
 
-        .thank-you-section {
-            display: none;
-            text-align: center;
-            padding: 8rem 1rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .thank-you-section h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            letter-spacing: -0.5px;
-            color: var(--text-main);
-        }
-
-        .thank-you-section p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-        }
-
-        /* Stopka */
         footer {
             text-align: center;
             padding: 4rem 1rem 2rem;
@@ -386,30 +364,13 @@
             margin-top: 3rem;
         }
 
-        /* Responsywność */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
             .header-container { flex-direction: column; gap: 1rem; }
             nav { gap: 0.75rem; }
             .minecraft-text-container { font-size: 0.75rem; }
-            
-            .gallery-container {
-                height: auto;
-                display: flex;
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-            
-            .screenshot-slot {
-                position: relative;
-                width: 100%;
-                height: 220px;
-                left: 0 !important;
-                right: 0 !important;
-                top: 0 !important;
-                opacity: 1 !important;
-                transform: none !important;
-            }
+            .gallery-container { height: auto; display: flex; flex-direction: column; gap: 1.5rem; }
+            .screenshot-slot { position: relative; width: 100%; height: 220px; left: 0 !important; right: 0 !important; top: 0 !important; opacity: 1 !important; transform: none !important; }
         }
     </style>
 </head>
@@ -422,14 +383,14 @@
                 Melon<span>Client</span>
             </a>
             <nav>
-                <a href="/#features">Funkcje</a>
+                <a href="#features">Funkcje</a>
                 <a href="https://github.com/monykPL/MelonClient/" target="_blank">GitHub</a>
                 <button class="open-modal-btn btn-nav-download">Pobierz</button>
             </nav>
         </div>
     </header>
 
-    <main id="homepage-content">
+    <main>
         <section class="hero">
             <div class="large-logo-container">
                 <img src="logo.png" alt="Melon Client Logo Duże">
@@ -452,15 +413,9 @@
 
         <section class="gallery-section">
             <div class="gallery-container">
-                <div class="screenshot-slot slot-2">
-                    <img src="screen2.png" alt="Zrzut ekranu 2">
-                </div>
-                <div class="screenshot-slot slot-3">
-                    <img src="screen3.png" alt="Zrzut ekranu 3">
-                </div>
-                <div class="screenshot-slot slot-1">
-                    <img src="screen1.png" alt="Główny zrzut ekranu 1">
-                </div>
+                <div class="screenshot-slot slot-2"><img src="screen2.png" alt="Zrzut ekranu 2"></div>
+                <div class="screenshot-slot slot-3"><img src="screen3.png" alt="Zrzut ekranu 3"></div>
+                <div class="screenshot-slot slot-1"><img src="screen1.png" alt="Główny zrzut ekranu 1"></div>
             </div>
         </section>
 
@@ -480,35 +435,16 @@
         </section>
     </main>
 
-    <section id="thank-you-page" class="thank-you-section">
-        <h1>Dziękuje za pobranie mojego clienta</h1>
-        <p>Pobierając to wspierasz monykPL. Życzę Miłej Gry!</p>
-    </section>
-
     <div id="download-modal" class="modal-overlay">
         <div class="modal-box">
             <span class="modal-close" id="close-modal-btn">&times;</span>
             <h2>Wybierz wersję systemu</h2>
-            
             <div class="arch-container">
-                <label class="arch-card">
-                    <input type="radio" name="system-arch" value="win64" checked>
-                    <span>Windows x64</span>
-                </label>
-                <label class="arch-card">
-                    <input type="radio" name="system-arch" value="win_arm64">
-                    <span>Windows ARM64</span>
-                </label>
-                <label class="arch-card">
-                    <input type="radio" name="system-arch" value="win32">
-                    <span>Windows x32</span>
-                </label>
-                <label class="arch-card">
-                    <input type="radio" name="system-arch" value="linux">
-                    <span>Linux</span>
-                </label>
+                <label class="arch-card"><input type="radio" name="system-arch" value="win64" checked><span>Windows x64</span></label>
+                <label class="arch-card"><input type="radio" name="system-arch" value="win_arm64"><span>Windows ARM64</span></label>
+                <label class="arch-card"><input type="radio" name="system-arch" value="win32"><span>Windows x32</span></label>
+                <label class="arch-card"><input type="radio" name="system-arch" value="linux"><span>Linux</span></label>
             </div>
-
             <button id="submit-download-btn" class="btn-download" style="width: 100%;">Pobierz teraz</button>
         </div>
     </div>
@@ -522,45 +458,20 @@
         const openModalBtns = document.querySelectorAll('.open-modal-btn');
         const closeModalBtn = document.getElementById('close-modal-btn');
         const submitDownloadBtn = document.getElementById('submit-download-btn');
-        
-        const homepageContent = document.getElementById('homepage-content');
-        const thankYouPage = document.getElementById('thank-you-page');
 
-        openModalBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                modal.style.display = 'flex';
-            });
-        });
-
-        closeModalBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
+        openModalBtns.forEach(btn => { btn.addEventListener('click', () => { modal.style.display = 'flex'; }); });
+        closeModalBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+        window.addEventListener('click', (e) => { if (e.target === modal) { modal.style.display = 'none'; } });
 
         submitDownloadBtn.addEventListener('click', () => {
             const selectedArch = document.querySelector('input[name="system-arch"]:checked').value;
-
-            let finalDownloadUrl = '#';
-            if (selectedArch === 'win64') finalDownloadUrl = 'https://github.com/monykPL/MelonClient/releases';
-            if (selectedArch === 'win_arm64') finalDownloadUrl = 'https://github.com/monykPL/MelonClient/releases';
-            if (selectedArch === 'win32') finalDownloadUrl = 'https://github.com/monykPL/MelonClient/releases';
-            if (selectedArch === 'linux') finalDownloadUrl = 'https://github.com/monykPL/MelonClient/releases';
+            let finalDownloadUrl = 'https://github.com/monykPL/MelonClient/releases';
 
             window.open(finalDownloadUrl, '_blank');
-
             modal.style.display = 'none';
-
-            homepageContent.style.display = 'none';
-            thankYouPage.style.display = 'block';
-
-            window.history.pushState({}, '', '/dziekujeinfo');
+            
+            window.location.href = './dziekujeinfo/';
         });
     </script>
-
 </body>
 </html>
