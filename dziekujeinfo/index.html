@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" href="../favicon.png">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dziękujemy za pobranie! - Melon Client</title>
     <style>
         :root {
             --bg-color: #111213;
+            --card-bg: #16171d;
             --accent-color: #1bd96a;
             --text-main: #ffffff;
             --text-muted: #a3a3a3;
@@ -88,6 +88,7 @@
         .thank-you-box {
             text-align: center;
             max-width: 700px;
+            width: 100%;
         }
 
         .thank-you-box h1 {
@@ -102,7 +103,62 @@
             color: var(--text-muted);
         }
 
-        /* Stopka */
+        .code-box-container {
+            display: none;
+            margin-top: 2.5rem;
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .code-content {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.95rem;
+            color: #ffffff;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .code-prompt {
+            color: #ff5f56;
+            font-weight: bold;
+            user-select: none;
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.6rem 0.8rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+        }
+
+        .copy-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
         footer {
             text-align: center;
             padding: 2rem 1rem;
@@ -130,13 +186,59 @@
     <main>
         <div class="thank-you-box">
             <h1>Dziękuje za pobranie mojego clienta</h1>
-            <p>Pobierając ten client wspierasz monykPL. Życzę Miłej Gry!</p>
+            <p>Pobierając to wspierasz monykPL. Życzę Miłej Gry!</p>
+
+            <div id="code-box" class="code-box-container">
+                <div class="code-content">
+                    <span class="code-prompt">$</span>
+                    <span id="command-text">curl -fsSL https://raw.githubusercontent.com/monykPL/MelonClient/main/install.sh | bash</span>
+                </div>
+                <button id="copy-btn" class="copy-btn" title="Skopiuj komendę">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                    </svg>
+                </button>
+            </div>
         </div>
     </main>
 
     <footer>
         <p>&copy; 2026 Melon Client. Strona zainspirowana stylem Modrinth.</p>
     </footer>
+
+    <script>
+        const downloadLinks = {
+            win64: 'https://github.com/monykPL/MelonClient/releases/download/v1.0.0/MelonClient-Setup-x64.exe',
+            win_arm64: 'https://github.com/monykPL/MelonClient/releases/download/v1.0.0/MelonClient-Setup-arm64.exe',
+            win32: 'https://github.com/monykPL/MelonClient/releases/download/v1.0.0/MelonClient-Setup-x32.exe'
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedOS = urlParams.get('os');
+
+        const codeBox = document.getElementById('code-box');
+        const copyBtn = document.getElementById('copy-btn');
+        const commandText = document.getElementById('command-text');
+
+        if (selectedOS === 'linux') {
+            codeBox.style.display = 'flex';
+        } else if (downloadLinks[selectedOS]) {
+            const link = document.createElement('a');
+            link.href = downloadLinks[selectedOS];
+            link.setAttribute('download', '');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(commandText.innerText);
+            copyBtn.style.color = '#1bd96a';
+            setTimeout(() => {
+                copyBtn.style.color = '';
+            }, 2000);
+        });
+    </script>
 
 </body>
 </html>
