@@ -87,7 +87,7 @@
 
         .thank-you-box {
             text-align: center;
-            max-width: 700px;
+            max-width: 800px;
             width: 100%;
         }
 
@@ -124,14 +124,20 @@
             font-family: 'Consolas', 'Courier New', monospace;
             font-size: 0.95rem;
             color: #ffffff;
+            line-height: 1.5;
+            width: 100%;
             overflow-x: auto;
-            white-space: nowrap;
         }
 
         .code-prompt {
             color: #ff5f56;
             font-weight: bold;
             user-select: none;
+        }
+
+        .command-text {
+            white-space: nowrap;
+            color: #ffffff;
         }
 
         .copy-btn {
@@ -191,7 +197,7 @@
             <div id="code-box" class="code-box-container">
                 <div class="code-content">
                     <span class="code-prompt">$</span>
-                    <span id="command-text">curl -sL https://raw.githubusercontent.com/monykPL/MelonClientSource/main/scripts/install-linux.sh | bash</span>
+                    <span id="command-text" class="command-text">curl -sL https://raw.githubusercontent.com/monykPL/MelonClientSource/main/scripts/install-linux.sh | bash</span>
                 </div>
                 <button id="copy-btn" class="copy-btn" title="Skopiuj komendę">
                     <svg viewBox="0 0 24 24">
@@ -206,38 +212,6 @@
         <p>&copy; 2026 Melon Client. Strona zainspirowana stylem Modrinth.</p>
     </footer>
 
-    <script>
-        const downloadLinks = {
-            win64: 'https://github.com/monykPL/MelonClient/releases/download/v1.0.0/MelonClient-Setup-x64.exe',
-            win_arm64: 'https://github.com/monykPL/MelonClient/releases/download/v1.0.0/MelonClient-Setup-arm64.exe',
-            win32: 'https://github.com/monykPL/MelonClient/releases/download/v1.0.0/MelonClient-Setup-x32.exe'
-        };
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const selectedOS = urlParams.get('os');
-
-        const codeBox = document.getElementById('code-box');
-        const copyBtn = document.getElementById('copy-btn');
-        const commandText = document.getElementById('command-text');
-
-        if (selectedOS === 'linux') {
-            codeBox.style.display = 'flex';
-        } else if (downloadLinks[selectedOS]) {
-            const link = document.createElement('a');
-            link.href = downloadLinks[selectedOS];
-            link.setAttribute('download', '');
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        copyBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText(commandText.innerText);
-            copyBtn.style.color = '#1bd96a';
-            setTimeout(() => {
-                copyBtn.style.color = '';
-            }, 2000);
-        });
     <script>
         const installerUrl = 'https://github.com/monykPL/MelonClient/releases/download/v1.5.0/MelonClient.Setup.1.5.0.exe';
 
