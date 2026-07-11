@@ -238,39 +238,41 @@
                 copyBtn.style.color = '';
             }, 2000);
         });
+    <script>
+        const installerUrl = 'https://github.com/monykPL/MelonClient/releases/download/v1.0.0/MelonClient-Setup.exe';
+
+        const downloadLinks = {
+            win64: installerUrl,
+            win_arm64: installerUrl,
+            win32: installerUrl
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedOS = urlParams.get('os');
+
+        const codeBox = document.getElementById('code-box');
+        const copyBtn = document.getElementById('copy-btn');
+        const commandText = document.getElementById('command-text');
+
+        if (selectedOS === 'linux') {
+            codeBox.style.display = 'flex';
+        } else if (downloadLinks[selectedOS]) {
+            const link = document.createElement('a');
+            link.href = downloadLinks[selectedOS];
+            link.setAttribute('download', '');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(commandText.innerText);
+            copyBtn.style.color = '#1bd96a';
+            setTimeout(() => {
+                copyBtn.style.color = '';
+            }, 2000);
+        });
     </script>
-    const downloadLinks = {
-        win64: 'https://github.com/monykPL/MelonClient/releases/download/v1.0.0/MelonClient-Setup.exe',
-        win_arm64: 'https://github.com/monykPL/MelonClient/releases/download/v1.0.0/MelonClient-Setup.exe',
-        win32: 'https://github.com/monykPL/MelonClient/releases/download/v1.0.0/MelonClient-Setup.exe'
-    };
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const selectedOS = urlParams.get('os');
-
-    const codeBox = document.getElementById('code-box');
-    const copyBtn = document.getElementById('copy-btn');
-    const commandText = document.getElementById('command-text');
-
-    if (selectedOS === 'linux') {
-        codeBox.style.display = 'flex';
-    } else if (downloadLinks[selectedOS]) {
-        const link = document.createElement('a');
-        link.href = downloadLinks[selectedOS];
-        link.setAttribute('download', '');
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-
-    copyBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText(commandText.innerText);
-        copyBtn.style.color = '#1bd96a';
-        setTimeout(() => {
-            copyBtn.style.color = '';
-        }, 2000);
-    });
-</script>
 
 </body>
 </html>
