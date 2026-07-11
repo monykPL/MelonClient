@@ -462,8 +462,9 @@
         window.addEventListener('click', (e) => { if (e.target === modal) { modal.style.display = 'none'; } });
 
         submitDownloadBtn.addEventListener('click', () => {
+            const selectedArch = document.querySelector('input[name="system-arch"]:checked').value;
             modal.style.display = 'none';
-            window.location.href = './dziekujeinfo/';
+            window.location.href = './dziekujeinfo/?os=' + selectedArch;
         });
     </script>
 </body>
