@@ -32,6 +32,7 @@
             overflow-x: hidden;
         }
 
+        /* Modale (Język i Pobieranie) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -118,6 +119,7 @@
             cursor: pointer;
         }
 
+        /* Sticky Header - Zwrócony oryginalny wygląd z dodanym Discordem */
         header {
             position: sticky;
             top: 0;
@@ -141,13 +143,6 @@
             font-weight: 800;
             color: var(--text-main);
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo img {
-            height: 32px;
         }
 
         .logo span {
@@ -157,26 +152,27 @@
         nav {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
-        nav a {
+        nav a.nav-link {
             color: var(--text-muted);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.2s;
         }
 
-        nav a:hover {
+        nav a.nav-link:hover {
             color: var(--text-main);
         }
 
+        /* Przycisk Discord w menu */
         .discord-btn {
             background-color: var(--discord-color);
             color: #ffffff;
             text-decoration: none;
             font-weight: 600;
-            padding: 0.6rem 1.2rem;
+            padding: 0.5rem 1rem;
             border-radius: 8px;
             display: inline-flex;
             align-items: center;
@@ -190,11 +186,12 @@
         }
 
         .discord-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             fill: currentColor;
         }
 
+        /* Hero Section */
         .hero {
             text-align: center;
             padding: 7rem 2rem 5rem 2rem;
@@ -238,8 +235,9 @@
             transform: translateY(-1px);
         }
 
+        /* STARE WYSUWANE KWADRACIKI (Akordeon) */
         .features-section {
-            max-width: 1000px;
+            max-width: 800px;
             margin: 5rem auto;
             padding: 0 2rem;
             text-align: center;
@@ -252,21 +250,60 @@
             color: #ffffff;
         }
 
-        .feature-rotator {
-            background-color: #141519;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            padding: 2.5rem 2rem;
-            border-radius: 14px;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.35rem;
-            font-weight: 600;
-            color: var(--accent-color);
-            transition: opacity 0.4s ease;
+        .features-accordion {
+            text-align: left;
         }
 
+        .feature-box {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .feature-box:hover {
+            background-color: #1a1b22;
+        }
+
+        .feature-header {
+            padding: 1.5rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .feature-header::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-box.active .feature-header::after {
+            transform: rotate(45deg);
+        }
+
+        .feature-content {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .feature-box.active .feature-content {
+            padding-bottom: 1.5rem;
+            max-height: 300px;
+        }
+
+        /* Galeria */
         .gallery-section {
             max-width: 1200px;
             margin: 7rem auto;
@@ -299,12 +336,11 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
         .screenshot-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
         }
 
         .screenshot-card img {
@@ -315,30 +351,20 @@
             object-fit: cover;
         }
 
-        .community-section {
-            text-align: center;
-            padding: 6rem 2rem;
-            background: linear-gradient(180deg, transparent, rgba(88, 101, 242, 0.03));
-        }
-
-        .discord-btn.large {
-            padding: 1rem 2.8rem;
-            font-size: 1.15rem;
-            border-radius: 10px;
-            margin-top: 1.5rem;
-        }
-
+        /* Footer */
         footer {
             text-align: center;
             padding: 3rem 1rem;
             color: var(--text-muted);
             font-size: 0.9rem;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 5rem;
         }
     </style>
 </head>
 <body>
 
+    <!-- 1. MODAL WYBORU JĘZYKA -->
     <div id="lang-overlay" class="modal-overlay">
         <div class="modal">
             <h2>Choose your language</h2>
@@ -349,12 +375,13 @@
                 </button>
                 <button class="modal-btn" onclick="setLanguage('pl')">
                     <span class="lang-flag">🇵🇱</span>
-                    <span>POLAND</span>
+                    <span>POLSKI</span>
                 </button>
             </div>
         </div>
     </div>
 
+    <!-- 2. MODAL UPROSZCZONEGO WYBORU OS -->
     <div id="download-overlay" class="modal-overlay" style="display: none; opacity: 0;">
         <div class="modal">
             <button class="close-modal" onclick="closeDownloadModal()">&times;</button>
@@ -372,24 +399,25 @@
         </div>
     </div>
 
+    <!-- Stare Menu + Discord -->
     <header>
         <div class="header-container">
             <a href="#" class="logo">
-                <img src="logo-small.png" alt="Melon Client Logo">
                 Melon<span>Client</span>
             </a>
             <nav>
-                <a href="#features" id="nav-features">Funkcje</a>
-                <a href="#gallery" id="nav-gallery">Galeria</a>
-                <a href="https://github.com/monykPL/MelonClient/" target="_blank">GitHub</a>
+                <a href="#features" class="nav-link" id="nav-features">Funkcje</a>
+                <a href="#gallery" class="nav-link" id="nav-gallery">Galeria</a>
+                <a href="https://github.com/monykPL/MelonClient/" target="_blank" class="nav-link">GitHub</a>
                 <a href="#" target="_blank" class="discord-btn discord-link">
                     <svg class="discord-icon" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.72-10.93,68.6,68.6,0,0,1-10.64-5.12c.91-.67,1.81-1.37,2.67-2.1a75.22,75.22,0,0,0,72.76,0c.87.73,1.76,1.43,2.67,2.1a68.86,68.86,0,0,1-10.64,5.12,74.74,74.74,0,0,0,6.72,10.93,105.54,105.54,0,0,0,31.05-18.83C129.54,49.54,123.59,26.74,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/></svg>
-                    <span class="discord-text">Dołącz na serwer</span>
+                    <span class="discord-text">Dołącz</span>
                 </a>
             </nav>
         </div>
     </header>
 
+    <!-- Hero Section -->
     <main>
         <section class="hero">
             <h1 id="hero-title">Nowa era rozgrywki w Minecraft</h1>
@@ -397,11 +425,36 @@
             <button class="main-download-btn" id="hero-download-btn" onclick="openDownloadModal()">Pobierz teraz</button>
         </section>
 
+        <!-- STARE WYSÓWANE FUNKCJE (Akordeon) -->
         <section class="features-section" id="features">
             <h2 id="features-title">Dlaczego Melon Client?</h2>
-            <div class="feature-rotator" id="rotator-text">🚀 Maksymalna wydajność i FPS</div>
+            <div class="features-accordion">
+                
+                <div class="feature-box" onclick="this.classList.toggle('active')">
+                    <div class="feature-header" id="feat-1-title">🚀 Maksymalna wydajność i FPS</div>
+                    <div class="feature-content" id="feat-1-desc">
+                        Nasz launcher korzysta z najnowszych metod optymalizacji gry. Automatycznie konfiguruje środowisko Java, aby wyciągnąć maksymalną ilość klatek na sekundę z każdego sprzętu.
+                    </div>
+                </div>
+
+                <div class="feature-box" onclick="this.classList.toggle('active')">
+                    <div class="feature-header" id="feat-2-title">🎨 Nowoczesny, ciemny design</div>
+                    <div class="feature-content" id="feat-2-desc">
+                        Zapomnij o starych, brzydkich oknach. Melon Client oferuje przejrzysty, minimalistyczny i miły dla oka interfejs, w którym znajdziesz wszystko, czego potrzebujesz.
+                    </div>
+                </div>
+
+                <div class="feature-box" onclick="this.classList.toggle('active')">
+                    <div class="feature-header" id="feat-3-title">🛡️ Pełne bezpieczeństwo i stabilność</div>
+                    <div class="feature-content" id="feat-3-desc">
+                        Twoje dane i konta są w pełni bezpieczne. Launcher został napisany z myślą o najwyższych standardach bezpieczeństwa, eliminując ryzyko wycieku danych czy awarii podczas gry.
+                    </div>
+                </div>
+
+            </div>
         </section>
 
+        <!-- Sekcja Galerii -->
         <section class="gallery-section" id="gallery">
             <h2 id="gallery-title">Zrzuty ekranu z launchera</h2>
             <div class="gallery-container">
@@ -410,18 +463,10 @@
                 <div class="screenshot-card"><img src="screen3.png" alt="Screenshot 3"></div>
             </div>
         </section>
-
-        <section class="community-section">
-            <h2 id="community-title">Masz pytania? Dołącz do nas!</h2>
-            <a href="#" target="_blank" class="discord-btn large discord-link">
-                <svg class="discord-icon" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.72-10.93,68.6,68.6,0,0,1-10.64-5.12c.91-.67,1.81-1.37,2.67-2.1a75.22,75.22,0,0,0,72.76,0c.87.73,1.76,1.43,2.67,2.1a68.86,68.86,0,0,1-10.64,5.12,74.74,74.74,0,0,0,6.72,10.93,105.54,105.54,0,0,0,31.05-18.83C129.54,49.54,123.59,26.74,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/></svg>
-                <span class="discord-text">Dołącz na serwer</span>
-            </a>
-        </section>
     </main>
 
     <footer>
-        <p id="footer-text">&copy; 2026 Melon Client. Strona zainspirowana stylem Modrinth.</p>
+        <p id="footer-text">&copy; 2026 Melon Client. Wszelkie prawa zastrzeżone.</p>
     </footer>
 
     <script>
@@ -435,50 +480,43 @@
                 title: "Melon Client - Nowoczesny Launcher Minecraft",
                 navFeatures: "Funkcje",
                 navGallery: "Galeria",
-                discordText: "Dołącz na serwer",
+                discordText: "Dołącz",
                 heroTitle: "Nowa era rozgrywki w Minecraft",
                 heroSubtitle: "Zoptymalizowany, szybki i nowoczesny launcher stworzony z myślą o najwyższej wydajności FPS oraz stabilności.",
                 heroDownload: "Pobierz teraz",
                 featuresTitle: "Dlaczego Melon Client?",
                 galleryTitle: "Zrzuty ekranu z launchera",
-                communityTitle: "Masz pytania? Dołącz do nas!",
                 modalTitle: "Wybierz swój system",
-                footer: "&copy; 2026 Melon Client. Strona zainspirowana stylem Modrinth.",
-                rotator: [
-                    "🚀 Maksymalna wydajność i FPS",
-                    "🎨 Piękny, nowoczesny interfejs w stylu ciemnym",
-                    "🛡️ Pełne bezpieczeństwo i stabilność profilu",
-                    "⚡ Błyskawiczne uruchamianie gry"
-                ]
+                footer: "&copy; 2026 Melon Client. Wszelkie prawa zastrzeżone.",
+                f1Title: "🚀 Maksymalna wydajność i FPS",
+                f1Desc: "Nasz launcher korzysta z najnowszych metod optymalizacji gry. Automatycznie konfiguruje środowisko Java, aby wyciągnąć maksymalną ilość klatek na sekundę z każdego sprzętu.",
+                f2Title: "🎨 Nowoczesny, ciemny design",
+                f2Desc: "Zapomnij o starych, brzydkich oknach. Melon Client oferuje przejrzysty, minimalistyczny i miły dla oka interfejs, w którym znajdziesz wszystko, czego potrzebujesz.",
+                f3Title: "🛡️ Pełne bezpieczeństwo i stabilność",
+                f3Desc: "Twoje dane i konta są w pełni bezpieczne. Launcher został napisany z myślą o najwyższych standardach bezpieczeństwa, eliminując ryzyko wycieku danych czy awarii podczas gry."
             },
             eng: {
                 title: "Melon Client - Modern Minecraft Launcher",
                 navFeatures: "Features",
                 navGallery: "Gallery",
-                discordText: "Join the server",
+                discordText: "Join",
                 heroTitle: "A new era of Minecraft gaming",
                 heroSubtitle: "Optimized, fast and modern launcher built for the highest FPS performance and rock-solid stability.",
                 heroDownload: "Download now",
                 featuresTitle: "Why Melon Client?",
                 galleryTitle: "Launcher Screenshots",
-                communityTitle: "Got questions? Join us!",
                 modalTitle: "Select your OS",
-                footer: "&copy; 2026 Melon Client. Site inspired by Modrinth style.",
-                rotator: [
-                    "🚀 Maximum performance and FPS boost",
-                    "🎨 Beautiful, modern dark-themed interface",
-                    "🛡️ Complete safety and profile stability",
-                    "⚡ Lightning fast game launching"
-                ]
+                footer: "&copy; 2026 Melon Client. All rights reserved.",
+                f1Title: "🚀 Maximum performance and FPS",
+                f1Desc: "Our launcher uses the latest game optimization methods. It automatically configures the Java environment to squeeze the maximum FPS out of any hardware.",
+                f2Title: "🎨 Modern, dark design",
+                f2Desc: "Forget about old, ugly windows. Melon Client offers a clean, minimalist, and eye-friendly interface where you will find everything you need.",
+                f3Title: "🛡️ Complete safety and stability",
+                f3Desc: "Your data and accounts are fully secure. The launcher was written with the highest security standards in mind, eliminating the risk of data leaks or crashes."
             }
         };
 
-        let currentLang = 'pl';
-        let rotatorInterval;
-
         function setLanguage(lang) {
-            currentLang = lang;
-            
             const langOverlay = document.getElementById('lang-overlay');
             langOverlay.style.opacity = '0';
             setTimeout(() => langOverlay.style.display = 'none', 300);
@@ -491,17 +529,22 @@
             document.getElementById('hero-download-btn').innerText = translations[lang].heroDownload;
             document.getElementById('features-title').innerText = translations[lang].featuresTitle;
             document.getElementById('gallery-title').innerText = translations[lang].galleryTitle;
-            document.getElementById('community-title').innerText = translations[lang].communityTitle;
             document.getElementById('modal-download-title').innerText = translations[lang].modalTitle;
             document.getElementById('footer-text').innerHTML = translations[lang].footer;
+
+            // Teksty akordeonu
+            document.getElementById('feat-1-title').innerText = translations[lang].f1Title;
+            document.getElementById('feat-1-desc').innerText = translations[lang].f1Desc;
+            document.getElementById('feat-2-title').innerText = translations[lang].f2Title;
+            document.getElementById('feat-2-desc').innerText = translations[lang].f2Desc;
+            document.getElementById('feat-3-title').innerText = translations[lang].f3Title;
+            document.getElementById('feat-3-desc').innerText = translations[lang].f3Desc;
 
             document.querySelectorAll('.discord-link').forEach(btn => btn.href = discordLinks[lang]);
             document.querySelectorAll('.discord-text').forEach(txt => txt.innerText = translations[lang].discordText);
 
             document.getElementById('os-win-btn').href = `./dziekujeinfo/?os=windows&lang=${lang}`;
             document.getElementById('os-lin-btn').href = `./dziekujeinfo/?os=linux&lang=${lang}`;
-
-            startRotator();
         }
 
         function openDownloadModal() {
@@ -514,24 +557,6 @@
             const modal = document.getElementById('download-overlay');
             modal.style.opacity = '0';
             setTimeout(() => modal.style.display = 'none', 300);
-        }
-
-        function startRotator() {
-            if(rotatorInterval) clearInterval(rotatorInterval);
-            const textElement = document.getElementById('rotator-text');
-            const lines = translations[currentLang].rotator;
-            let index = 0;
-            
-            textElement.innerText = lines[index];
-            
-            rotatorInterval = setInterval(() => {
-                index = (index + 1) % lines.length;
-                textElement.style.opacity = '0';
-                setTimeout(() => {
-                    textElement.innerText = lines[index];
-                    textElement.style.opacity = '1';
-                }, 400);
-            }, 3500);
         }
     </script>
 </body>
