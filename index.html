@@ -5,7 +5,7 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">Melon Client - Szybki. Stabilny. Twój.</title>
-    <!-- Import czcionek: Główna oraz Pikselowa do motywu Minecraft -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -37,15 +37,14 @@
             overflow-x: hidden;
         }
 
-        /* Modale (Język i Pobieranie) */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(11, 12, 13, 0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(11, 12, 13, 0.95);
+            backdrop-filter: blur(12px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -62,11 +61,10 @@
             max-width: 480px;
             width: 90%;
             box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            position: relative;
         }
 
         .modal h2 {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 2rem;
         }
@@ -91,7 +89,6 @@
             align-items: center;
             gap: 0.75rem;
             font-weight: 600;
-            text-decoration: none;
         }
 
         .modal-btn:hover {
@@ -100,28 +97,11 @@
             transform: translateY(-2px);
         }
 
-        .modal-btn img {
-            width: 40px;
-            height: 40px;
-        }
-
         .lang-flag {
             font-size: 2.5rem;
             line-height: 1;
         }
 
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Oryginalny Header ze zrzutu ekranu */
         header {
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             background-color: var(--bg-color);
@@ -144,8 +124,8 @@
         }
 
         .logo-img {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             object-fit: contain;
         }
 
@@ -172,13 +152,21 @@
             font-weight: 500;
             font-size: 0.95rem;
             transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         nav a.nav-link:hover {
             color: #ffffff;
         }
 
-        /* Przycisk Pobierz w menu */
+        nav a.nav-link svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
         .nav-download-btn {
             background-color: var(--accent-color);
             color: #000000;
@@ -188,49 +176,56 @@
             border-radius: 6px;
             font-size: 0.95rem;
             transition: background-color 0.2s;
-            border: none;
-            cursor: pointer;
         }
 
         .nav-download-btn:hover {
             background-color: var(--accent-hover);
         }
 
-        /* Hero Section - Dokładne odwzorowanie image_b42260.png */
         .hero {
             text-align: center;
-            padding: 4.5rem 2rem 3rem 2rem;
+            padding: 5rem 2rem 3rem 2rem;
             max-width: 900px;
             margin: 0 auto;
         }
 
         .hero-main-logo {
-            width: 160px;
+            width: 190px;
             height: auto;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .pixel-text-container {
             font-family: var(--font-pixel);
-            font-size: 0.85rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
+            font-size: 1.3rem;
+            line-height: 2;
+            margin-bottom: 2.5rem;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .pixel-yellow {
             color: var(--pixel-yellow);
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        .pixel-white-box {
+            height: 2.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .pixel-white {
             color: #ffffff;
-            display: block;
+            text-shadow: 2px 2px 0px #000;
+            transition: opacity 0.2s ease;
         }
 
         .hero h1 {
-            font-size: 3.2rem;
+            font-size: 3.4rem;
             font-weight: 800;
             letter-spacing: -0.5px;
             margin-bottom: 1.2rem;
@@ -238,13 +233,12 @@
         }
 
         .hero p {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--text-muted);
             margin-bottom: 2.5rem;
             max-width: 680px;
             margin-left: auto;
             margin-right: auto;
-            font-weight: 400;
         }
 
         .hero-download-btn {
@@ -258,18 +252,18 @@
             cursor: pointer;
             transition: background-color 0.2s;
             box-shadow: 0 4px 20px rgba(27, 217, 106, 0.2);
+            text-decoration: none;
+            display: inline-block;
         }
 
         .hero-download-btn:hover {
             background-color: var(--accent-hover);
         }
 
-        /* Trójwymiarowy stos zrzutów ekranu - Odwzorowanie image_b4227b.png */
         .screenshot-section {
             max-width: 1100px;
-            margin: 2rem auto 5rem auto;
+            margin: 2rem auto 6rem auto;
             padding: 0 2rem;
-            position: relative;
         }
 
         .screenshot-stack {
@@ -285,37 +279,10 @@
             position: absolute;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
             background: #1e1f26;
-            transition: all 0.3s ease;
-        }
-
-        /* Boczne, cofnięte makiety */
-        .screen-mockup.back-left {
-            width: 50%;
-            left: 5%;
-            z-index: 1;
-            opacity: 0.25;
-            filter: blur(1px);
-            transform: scale(0.9);
-        }
-
-        .screen-mockup.back-right {
-            width: 50%;
-            right: 5%;
-            z-index: 1;
-            opacity: 0.25;
-            filter: blur(1px);
-            transform: scale(0.9);
-        }
-
-        /* Główna makieta na środku */
-        .screen-mockup.front-center {
-            width: 60%;
-            z-index: 2;
-            border: 2px solid var(--accent-color);
-            opacity: 1;
-            transform: scale(1);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, filter 0.4s ease;
+            width: 52%;
         }
 
         .screen-mockup img {
@@ -325,7 +292,48 @@
             object-fit: cover;
         }
 
-        /* Siatka trzech kart - Odwzorowanie image_b42281.png */
+        .screen-mockup.back-left {
+            left: 4%;
+            z-index: 1;
+            opacity: 0.25;
+            filter: blur(1.5px);
+            transform: scale(0.88) rotate(-2px);
+        }
+
+        .screen-mockup.back-right {
+            right: 4%;
+            z-index: 1;
+            opacity: 0.25;
+            filter: blur(1.5px);
+            transform: scale(0.88) rotate(2px);
+        }
+
+        .screen-mockup.front-center {
+            z-index: 2;
+            border: 2px solid var(--accent-color);
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .screenshot-stack:hover .screen-mockup.back-left {
+            transform: scale(0.92) translateX(-40px) rotate(-4px);
+            opacity: 0.45;
+            filter: blur(0.5px);
+        }
+
+        .screenshot-stack:hover .screen-mockup.back-right {
+            transform: scale(0.92) translateX(40px) rotate(4px);
+            opacity: 0.45;
+            filter: blur(0.5px);
+        }
+
+        .screen-mockup:hover {
+            z-index: 10 !important;
+            opacity: 1 !important;
+            filter: blur(0px) !important;
+            transform: scale(1.04) !important;
+        }
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -370,7 +378,6 @@
             line-height: 1.6;
         }
 
-        /* Stopka */
         footer {
             text-align: center;
             padding: 2.5rem 1rem;
@@ -382,7 +389,6 @@
 </head>
 <body>
 
-    <!-- 1. SYSTEM JĘZYKÓW (ZACHOWANY) -->
     <div id="lang-overlay" class="modal-overlay">
         <div class="modal">
             <h2>Choose your language / Wybierz język</h2>
@@ -399,49 +405,33 @@
         </div>
     </div>
 
-    <!-- 2. OKNO POBIERANIA (Z PRZEKIEROWANIEM NA GITHUB RELEASES) -->
-    <div id="download-overlay" class="modal-overlay" style="display: none; opacity: 0;">
-        <div class="modal">
-            <button class="close-modal" onclick="closeDownloadModal()">&times;</button>
-            <h2 id="modal-download-title">Wybierz swój system</h2>
-            <div class="modal-options">
-                <!-- Bezpośrednie bezpieczne przekierowanie do Twojego dziekujeinfo z parametrami -->
-                <a href="./dziekujeinfo/?os=windows" class="modal-btn" id="os-win-btn">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" alt="Windows">
-                    <span>Windows</span>
-                </a>
-                <a href="./dziekujeinfo/?os=linux" class="modal-btn" id="os-lin-btn">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux">
-                    <span>Linux</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Prawdziwy Stary Header + Zmiany (Discord) -->
     <header>
         <div class="header-container">
             <a href="#" class="logo-wrapper">
-                <img src="favicon.png" alt="Melon Logo" class="logo-img">
+                <img src="logo.png" alt="Melon Logo" class="logo-img">
                 <div class="logo-text">Melon<span>Client</span></div>
             </a>
             <nav>
                 <a href="#features" class="nav-link" id="nav-features">Funkcje</a>
                 <a href="https://github.com/monykPL/MelonClient/" target="_blank" class="nav-link">GitHub</a>
-                <a href="https://discord.gg/GjPypUGW6" target="_blank" class="nav-link" id="nav-discord">Discord</a>
-                <button class="nav-download-btn" id="nav-download" onclick="openDownloadModal()">Pobierz</button>
+                <a href="https://discord.gg/GjPypUGW6" target="_blank" class="nav-link" id="nav-discord">
+                    <svg viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.72-10.93,68.6,68.6,0,0,1-10.64-5.12c.91-.67,1.81-1.37,2.67-2.1a75.22,75.22,0,0,0,72.76,0c.87.73,1.76,1.43,2.67,2.1a68.86,68.86,0,0,1-10.64,5.12,74.74,74.74,0,0,0,6.72,10.93,105.54,105.54,0,0,0,31.05-18.83C129.54,49.54,123.59,26.74,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/></svg>
+                    <span>Discord</span>
+                </a>
+                <a href="https://github.com/monykPL/MelonClient/releases" target="_blank" class="nav-download-btn" id="nav-download">Pobierz</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <!-- Sekcja Główna (Hero) z image_b42260.png -->
         <section class="hero">
-            <img src="favicon.png" alt="Melon Client Logo" class="hero-main-logo">
+            <img src="logo.png" alt="Melon Client Logo" class="hero-main-logo">
             
             <div class="pixel-text-container">
                 <span class="pixel-yellow" id="pixel-top">Najlepszy Client bo:</span>
-                <span class="pixel-white" id="pixel-bottom">Jest Polski</span>
+                <div class="pixel-white-box">
+                    <span class="pixel-white" id="pixel-changing">Jest Polski</span>
+                </div>
             </div>
 
             <h1 id="hero-title">Szybki. Stabilny. Twój.</h1>
@@ -451,10 +441,9 @@
                 Zarządzaj modami i profilami w mgnieniu oka.
             </p>
             
-            <button class="hero-download-btn" id="hero-btn" onclick="openDownloadModal()">Pobierz Launcher</button>
+            <a href="https://github.com/monykPL/MelonClient/releases" target="_blank" class="hero-download-btn" id="hero-btn">Pobierz Launcher</a>
         </section>
 
-        <!-- Trójwymiarowy stos zrzutów z ekranu z image_b4227b.png -->
         <section class="screenshot-section" id="features">
             <div class="screenshot-stack">
                 <div class="screen-mockup back-left">
@@ -469,9 +458,7 @@
             </div>
         </section>
 
-        <!-- Oryginalne Trzy Kafelki z Cechami z image_b42281.png -->
         <section class="features-grid">
-            
             <div class="feature-card">
                 <h3 id="card1-title">🚀 Maksymalna Wydajność</h3>
                 <p id="card1-desc">Zoptymalizowany kod sprawia, że launcher uruchamia się natychmiastowo i nie zużywa zbędnych zasobów komputera podczas gry.</p>
@@ -486,7 +473,6 @@
                 <h3 id="card3-title">🎨 Czysty Interfejs</h3>
                 <p id="card3-desc">Zaprojektowany od zera z myślą o intuicyjności. Koniec z topornymi oknami i skomplikowanymi ustawieniami.</p>
             </div>
-
         </section>
     </main>
 
@@ -495,11 +481,19 @@
     </footer>
 
     <script>
-        // Zapobieganie problemom z linkami Discord zależnie od języka
         const discordLinks = {
             pl: 'https://discord.gg/GjPypUGW6',
             eng: 'https://discord.gg/6HbSsbtvJ'
         };
+
+        const textRotator = {
+            pl: ["Jest Polski", "Ma dużo FPS", "Jest darmowy", "Jest stabilny"],
+            eng: ["It's Polish made", "Boosts your FPS", "Completely free", "Rock stable"]
+        };
+
+        let currentLang = 'pl';
+        let textIndex = 0;
+        let rotationInterval;
 
         const translations = {
             pl: {
@@ -507,11 +501,9 @@
                 navFeatures: "Funkcje",
                 navDownload: "Pobierz",
                 pixelTop: "Najlepszy Client bo:",
-                pixelBottom: "Jest Polski",
                 heroTitle: "Szybki. Stabilny. Twój.",
                 heroSubtitle: "Nowoczesny launcher do Minecrafta stworzony z myślą o wydajności i wygodzie graczów. Zarządzaj modami i profilami w mgnieniu oka.",
                 heroBtn: "Pobierz Launcher",
-                modalTitle: "Wybierz swój system",
                 c1Title: "🚀 Maksymalna Wydajność",
                 c1Desc: "Zoptymalizowany kod sprawia, że launcher uruchamia się natychmiastowo i nie zużywa zbędnych zasobów komputera podczas gry.",
                 c2Title: "🧩 Integracja z Modrinth",
@@ -525,11 +517,9 @@
                 navFeatures: "Features",
                 navDownload: "Download",
                 pixelTop: "The best client because:",
-                pixelBottom: "It's Polish made",
                 heroTitle: "Fast. Stable. Yours.",
                 heroSubtitle: "A modern Minecraft launcher built for pure performance and convenience. Manage your mods and profiles in the blink of an eye.",
                 heroBtn: "Download Launcher",
-                modalTitle: "Select your OS",
                 c1Title: "🚀 Maximum Performance",
                 c1Desc: "Optimized code ensures the launcher starts instantly and doesn't consume unnecessary system resources during gameplay.",
                 c2Title: "🧩 Modrinth Integration",
@@ -540,21 +530,36 @@
             }
         };
 
+        function startTextRotation(lang) {
+            clearInterval(rotationInterval);
+            const textElement = document.getElementById('pixel-changing');
+            textIndex = 0;
+            textElement.innerText = textRotator[lang][textIndex];
+
+            rotationInterval = setInterval(() => {
+                textElement.style.opacity = '0'; 
+                setTimeout(() => {
+                    textIndex = (textIndex + 1) % textRotator[lang].length;
+                    textElement.innerText = textRotator[lang][textIndex];
+                    textElement.style.opacity = '1'; 
+                }, 200);
+            }, 3000); 
+        }
+
         function setLanguage(lang) {
+            currentLang = lang;
             const langOverlay = document.getElementById('lang-overlay');
             langOverlay.style.opacity = '0';
             setTimeout(() => langOverlay.style.display = 'none', 300);
 
-            // Zmiana tekstów na stronie
+            // Zmiana treści na stronie
             document.getElementById('page-title').innerText = translations[lang].title;
             document.getElementById('nav-features').innerText = translations[lang].navFeatures;
             document.getElementById('nav-download').innerText = translations[lang].navDownload;
             document.getElementById('pixel-top').innerText = translations[lang].pixelTop;
-            document.getElementById('pixel-bottom').innerText = translations[lang].pixelBottom;
             document.getElementById('hero-title').innerText = translations[lang].heroTitle;
             document.getElementById('hero-subtitle').innerText = translations[lang].heroSubtitle;
             document.getElementById('hero-btn').innerText = translations[lang].heroBtn;
-            document.getElementById('modal-download-title').innerText = translations[lang].modalTitle;
             
             document.getElementById('card1-title').innerText = translations[lang].c1Title;
             document.getElementById('card1-desc').innerText = translations[lang].c1Desc;
@@ -565,22 +570,9 @@
             
             document.getElementById('footer-text').innerText = translations[lang].footer;
 
-            // Ustawienia linków i przekierowań regionalnych
             document.getElementById('nav-discord').href = discordLinks[lang];
-            document.getElementById('os-win-btn').href = `./dziekujeinfo/?os=windows&lang=${lang}`;
-            document.getElementById('os-lin-btn').href = `./dziekujeinfo/?os=linux&lang=${lang}`;
-        }
-
-        function openDownloadModal() {
-            const modal = document.getElementById('download-overlay');
-            modal.style.display = 'flex';
-            setTimeout(() => modal.style.opacity = '1', 10);
-        }
-
-        function closeDownloadModal() {
-            const modal = document.getElementById('download-overlay');
-            modal.style.opacity = '0';
-            setTimeout(() => modal.style.display = 'none', 300);
+            
+            startTextRotation(lang);
         }
     </script>
 </body>
