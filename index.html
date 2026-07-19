@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" href="favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">Melon Client - Nowoczesny Launcher Minecraft</title>
+    <title>Melon Client - Nowoczesny Launcher Minecraft</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
         :root {
             --bg-color: #111213;
-            --card-bg: #16171d;
+            --card-bg: #1c1e20;
+            --card-hover: #232629;
             --accent-color: #1bd96a;
-            --accent-hover: #15b856;
-            --discord-color: #5865F2;
-            --discord-hover: #4752C4;
+            --accent-hover: #15b858;
             --text-main: #ffffff;
             --text-muted: #a3a3a3;
             --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -32,99 +33,12 @@
             overflow-x: hidden;
         }
 
-        /* Modale (Język i Pobieranie) */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(11, 12, 13, 0.85);
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal {
-            background-color: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 2.5rem;
-            text-align: center;
-            max-width: 480px;
-            width: 90%;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            position: relative;
-        }
-
-        .modal h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            letter-spacing: -0.5px;
-        }
-
-        .modal-options {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-        }
-
-        .modal-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            cursor: pointer;
-            color: var(--text-main);
-            flex: 1;
-            transition: all 0.2s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            font-weight: 600;
-            font-size: 1.1rem;
-            text-decoration: none;
-        }
-
-        .modal-btn:hover {
-            border-color: var(--accent-color);
-            background: rgba(27, 217, 106, 0.1);
-            transform: translateY(-3px);
-        }
-
-        .modal-btn img {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-        }
-
-        .lang-flag {
-            font-size: 3rem;
-            line-height: 1;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Sticky Header - Zwrócony oryginalny wygląd z dodanym Discordem */
         header {
             position: sticky;
             top: 0;
             background-color: rgba(17, 18, 19, 0.85);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid #2d3034;
             z-index: 100;
         }
@@ -143,6 +57,15 @@
             font-weight: 800;
             color: var(--text-main);
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
         }
 
         .logo span {
@@ -152,412 +75,397 @@
         nav {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
-        nav a.nav-link {
+        nav a {
             color: var(--text-muted);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.2s;
         }
 
-        nav a.nav-link:hover {
+        nav a:hover {
             color: var(--text-main);
         }
 
-        /* Przycisk Discord w menu */
-        .discord-btn {
-            background-color: var(--discord-color);
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: background-color 0.2s;
-            font-size: 0.95rem;
+        .open-modal-btn {
+            cursor: pointer;
+            border: none;
+            font-family: var(--font-family);
         }
 
-        .discord-btn:hover {
-            background-color: var(--discord-hover);
+        .btn-nav-download {
+            background-color: var(--accent-color);
+            color: #000000 !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.2s;
         }
 
-        .discord-icon {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
+        .btn-nav-download:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
         }
 
-        /* Hero Section */
         .hero {
             text-align: center;
-            padding: 7rem 2rem 5rem 2rem;
-            max-width: 900px;
+            padding: 4rem 1rem 3rem;
+            max-width: 800px;
             margin: 0 auto;
         }
 
-        .hero h1 {
-            font-size: 3.8rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 1.5rem;
-            line-height: 1.15;
+        .large-logo-container {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .large-logo-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .minecraft-text-container {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1rem;
+            color: #ffaa00;
+            text-shadow: 2px 2px 0px #3f2a00;
+            margin-bottom: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .minecraft-static {
+            color: #ffaa00;
+        }
+
+        .minecraft-rotator {
+            height: 30px;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .minecraft-rotator .word {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            transform: translateY(-40px);
+            animation: dropWord 12s infinite ease-in-out;
+            text-align: center;
             color: #ffffff;
+            text-shadow: 2px 2px 0px #222;
+        }
+
+        .minecraft-rotator .word:nth-child(1) { animation-delay: 0s; }
+        .minecraft-rotator .word:nth-child(2) { animation-delay: 3s; }
+        .minecraft-rotator .word:nth-child(3) { animation-delay: 6s; }
+        .minecraft-rotator .word:nth-child(4) { animation-delay: 9s; }
+
+        @keyframes dropWord {
+            0% { opacity: 0; transform: translateY(-30px); }
+            4% { opacity: 1; transform: translateY(0); }
+            21% { opacity: 1; transform: translateY(0); }
+            25% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 0; transform: translateY(30px); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
         }
 
         .hero p {
             font-size: 1.25rem;
             color: var(--text-muted);
-            margin-bottom: 3rem;
-            max-width: 750px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 400;
-        }
-
-        .main-download-btn {
-            background-color: var(--accent-color);
-            color: #111213;
-            font-size: 1.15rem;
-            font-weight: 700;
-            padding: 0.9rem 2.8rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .main-download-btn:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-1px);
-        }
-
-        /* STARE WYSUWANE KWADRACIKI (Akordeon) */
-        .features-section {
-            max-width: 800px;
-            margin: 5rem auto;
-            padding: 0 2rem;
-            text-align: center;
-        }
-
-        .features-section h2 {
-            font-size: 2.2rem;
-            font-weight: 700;
             margin-bottom: 2.5rem;
-            color: #ffffff;
         }
 
-        .features-accordion {
-            text-align: left;
-        }
-
-        .feature-box {
-            background-color: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            overflow: hidden;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        .feature-box:hover {
-            background-color: #1a1b22;
-        }
-
-        .feature-header {
-            padding: 1.5rem 2rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-main);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .feature-header::after {
-            content: '+';
-            font-size: 1.5rem;
-            color: var(--accent-color);
-            transition: transform 0.3s ease;
-        }
-
-        .feature-box.active .feature-header::after {
-            transform: rotate(45deg);
-        }
-
-        .feature-content {
-            padding: 0 2rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-
-        .feature-box.active .feature-content {
-            padding-bottom: 1.5rem;
-            max-height: 300px;
-        }
-
-        /* Galeria */
-        .gallery-section {
-            max-width: 1200px;
-            margin: 7rem auto;
-            padding: 0 2rem;
-            text-align: center;
-        }
-
-        .gallery-section h2 {
-            font-size: 2.2rem;
+        .btn-download {
+            background-color: var(--accent-color);
+            color: #000000;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            margin-bottom: 3.5rem;
-            color: #ffffff;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.2s, background-color 0.2s;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(27, 217, 106, 0.3);
+            cursor: pointer;
+            border: none;
+            font-family: var(--font-family);
+        }
+
+        .btn-download:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .gallery-section {
+            max-width: 1000px;
+            margin: 2rem auto 4rem;
+            padding: 0 2rem;
         }
 
         .gallery-container {
+            position: relative;
+            height: 400px;
+            margin-top: 3rem;
+        }
+
+        .screenshot-slot {
+            position: absolute;
+            width: 55%;
+            height: 340px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), z-index 0.4s, opacity 0.4s, border 0.4s;
+            overflow: hidden;
+        }
+
+        .screenshot-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slot-1 { left: 50%; transform: translateX(-50%); z-index: 3; border: 2px solid var(--accent-color); }
+        .slot-2 { left: 5%; top: 25px; z-index: 1; opacity: 0.6; transform: scale(0.9); border: 2px solid rgba(255, 255, 255, 0.1); }
+        .slot-3 { right: 5%; top: 25px; z-index: 2; opacity: 0.6; transform: scale(0.9); border: 2px solid rgba(255, 255, 255, 0.1); }
+
+        .screenshot-slot:hover {
+            z-index: 10 !important;
+            opacity: 1 !important;
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 40px rgba(27, 217, 106, 0.25);
+        }
+
+        .slot-1:hover { transform: translateX(-50%) scale(1.03) !important; }
+        .slot-2:hover { transform: scale(1.03) !important; }
+        .slot-3:hover { transform: scale(1.03) !important; }
+
+        .features {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
         }
 
-        @media (max-width: 900px) {
-            .gallery-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .screenshot-card {
-            background: #141519;
+        .card {
+            background-color: var(--card-bg);
             border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
             border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
+            transition: background-color 0.2s, transform 0.2s;
         }
 
-        .screenshot-card:hover {
+        .card:hover {
+            background-color: var(--card-hover);
             transform: translateY(-4px);
         }
 
-        .screenshot-card img {
+        .card h3 { font-size: 1.3rem; margin-bottom: 0.75rem; color: var(--accent-color); }
+        .card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: auto;
-            display: block;
-            aspect-ratio: 16/9;
-            object-fit: cover;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
         }
 
-        /* Footer */
+        .modal-box {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 460px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.8rem;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .modal-box h2 { font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: 700; }
+
+        .arch-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .arch-card {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--bg-color);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .arch-card input {
+            margin-right: 1rem;
+            accent-color: var(--accent-color);
+            width: 18px;
+            height: 18px;
+        }
+
+        .arch-card span { font-weight: 600; font-size: 1rem; }
+        
+        .arch-card:has(input:checked) {
+            border-color: var(--accent-color);
+            background-color: var(--card-hover);
+        }
+
         footer {
             text-align: center;
-            padding: 3rem 1rem;
+            padding: 4rem 1rem 2rem;
             color: var(--text-muted);
             font-size: 0.9rem;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: 5rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .header-container { flex-direction: column; gap: 1rem; }
+            nav { gap: 0.75rem; }
+            .minecraft-text-container { font-size: 0.75rem; }
+            .gallery-container { height: auto; display: flex; flex-direction: column; gap: 1.5rem; }
+            .screenshot-slot { position: relative; width: 100%; height: 220px; left: 0 !important; right: 0 !important; top: 0 !important; opacity: 1 !important; transform: none !important; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. MODAL WYBORU JĘZYKA -->
-    <div id="lang-overlay" class="modal-overlay">
-        <div class="modal">
-            <h2>Choose your language</h2>
-            <div class="modal-options">
-                <button class="modal-btn" onclick="setLanguage('eng')">
-                    <span class="lang-flag">🇬🇧</span>
-                    <span>English</span>
-                </button>
-                <button class="modal-btn" onclick="setLanguage('pl')">
-                    <span class="lang-flag">🇵🇱</span>
-                    <span>POLSKI</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 2. MODAL UPROSZCZONEGO WYBORU OS -->
-    <div id="download-overlay" class="modal-overlay" style="display: none; opacity: 0;">
-        <div class="modal">
-            <button class="close-modal" onclick="closeDownloadModal()">&times;</button>
-            <h2 id="modal-download-title">Wybierz swój system</h2>
-            <div class="modal-options">
-                <a href="./dziekujeinfo/?os=windows" class="modal-btn" id="os-win-btn">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" alt="Windows">
-                    <span>Windows</span>
-                </a>
-                <a href="./dziekujeinfo/?os=linux" class="modal-btn" id="os-lin-btn">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux">
-                    <span>Linux</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Stare Menu + Discord -->
     <header>
         <div class="header-container">
-            <a href="#" class="logo">
+            <a href="/" class="logo">
+                <img src="logo-small.png" alt="Melon Client Logo">
                 Melon<span>Client</span>
             </a>
             <nav>
-                <a href="#features" class="nav-link" id="nav-features">Funkcje</a>
-                <a href="#gallery" class="nav-link" id="nav-gallery">Galeria</a>
-                <a href="https://github.com/monykPL/MelonClient/" target="_blank" class="nav-link">GitHub</a>
-                <a href="#" target="_blank" class="discord-btn discord-link">
-                    <svg class="discord-icon" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.72-10.93,68.6,68.6,0,0,1-10.64-5.12c.91-.67,1.81-1.37,2.67-2.1a75.22,75.22,0,0,0,72.76,0c.87.73,1.76,1.43,2.67,2.1a68.86,68.86,0,0,1-10.64,5.12,74.74,74.74,0,0,0,6.72,10.93,105.54,105.54,0,0,0,31.05-18.83C129.54,49.54,123.59,26.74,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/></svg>
-                    <span class="discord-text">Dołącz</span>
-                </a>
+                <a href="#features">Funkcje</a>
+                <a href="https://github.com/monykPL/MelonClient/" target="_blank">GitHub</a>
+                <button class="open-modal-btn btn-nav-download">Pobierz</button>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <main>
         <section class="hero">
-            <h1 id="hero-title">Nowa era rozgrywki w Minecraft</h1>
-            <p id="hero-subtitle">Zoptymalizowany, szybki i nowoczesny launcher stworzony z myślą o najwyższej wydajności FPS oraz stabilności.</p>
-            <button class="main-download-btn" id="hero-download-btn" onclick="openDownloadModal()">Pobierz teraz</button>
+            <div class="large-logo-container">
+                <img src="logo.png" alt="Melon Client Logo Duże">
+            </div>
+
+            <div class="minecraft-text-container">
+                <span class="minecraft-static">Najlepszy Client bo:</span>
+                <div class="minecraft-rotator">
+                    <div class="word">Jest Open-Source</div>
+                    <div class="word">Dobra Optymalizacja</div>
+                    <div class="word">Jest Polski</div>
+                    <div class="word">Fajny Support</div>
+                </div>
+            </div>
+
+            <h1>Szybki. Stabilny. Twój.</h1>
+            <p>Nowoczesny launcher do Minecrafta stworzony z myślą o wydajności i wygodzie graczów. Zarządzaj modami i profilami w mgnieniu oka.</p>
+            <button class="open-modal-btn btn-download">Pobierz Launcher</button>
         </section>
 
-        <!-- STARE WYSÓWANE FUNKCJE (Akordeon) -->
-        <section class="features-section" id="features">
-            <h2 id="features-title">Dlaczego Melon Client?</h2>
-            <div class="features-accordion">
-                
-                <div class="feature-box" onclick="this.classList.toggle('active')">
-                    <div class="feature-header" id="feat-1-title">🚀 Maksymalna wydajność i FPS</div>
-                    <div class="feature-content" id="feat-1-desc">
-                        Nasz launcher korzysta z najnowszych metod optymalizacji gry. Automatycznie konfiguruje środowisko Java, aby wyciągnąć maksymalną ilość klatek na sekundę z każdego sprzętu.
-                    </div>
-                </div>
-
-                <div class="feature-box" onclick="this.classList.toggle('active')">
-                    <div class="feature-header" id="feat-2-title">🎨 Nowoczesny, ciemny design</div>
-                    <div class="feature-content" id="feat-2-desc">
-                        Zapomnij o starych, brzydkich oknach. Melon Client oferuje przejrzysty, minimalistyczny i miły dla oka interfejs, w którym znajdziesz wszystko, czego potrzebujesz.
-                    </div>
-                </div>
-
-                <div class="feature-box" onclick="this.classList.toggle('active')">
-                    <div class="feature-header" id="feat-3-title">🛡️ Pełne bezpieczeństwo i stabilność</div>
-                    <div class="feature-content" id="feat-3-desc">
-                        Twoje dane i konta są w pełni bezpieczne. Launcher został napisany z myślą o najwyższych standardach bezpieczeństwa, eliminując ryzyko wycieku danych czy awarii podczas gry.
-                    </div>
-                </div>
-
+        <section class="gallery-section">
+            <div class="gallery-container">
+                <div class="screenshot-slot slot-2"><img src="screen2.png" alt="Zrzut ekranu 2"></div>
+                <div class="screenshot-slot slot-3"><img src="screen3.png" alt="Zrzut ekranu 3"></div>
+                <div class="screenshot-slot slot-1"><img src="screen1.png" alt="Główny zrzut ekranu 1"></div>
             </div>
         </section>
 
-        <!-- Sekcja Galerii -->
-        <section class="gallery-section" id="gallery">
-            <h2 id="gallery-title">Zrzuty ekranu z launchera</h2>
-            <div class="gallery-container">
-                <div class="screenshot-card"><img src="screen1.png" alt="Screenshot 1"></div>
-                <div class="screenshot-card"><img src="screen2.png" alt="Screenshot 2"></div>
-                <div class="screenshot-card"><img src="screen3.png" alt="Screenshot 3"></div>
+        <section class="features" id="features">
+            <div class="card">
+                <h3>🚀 Maksymalna Wydajność</h3>
+                <p>Zoptymalizowany kod sprawia, że launcher uruchamia się natychmiastowo i nie zużywa zbędnych zasobów komputera podczas gry.</p>
+            </div>
+            <div class="card">
+                <h3>🧩 Integracja z Modrinth</h3>
+                <p>Przeglądaj, pobieraj i aktualizuj swoje ulubione paczki modów bezpośrednio z poziomu aplikacji bez zbędnego kombinowania.</p>
+            </div>
+            <div class="card">
+                <h3>🎨 Czysty Interfejs</h3>
+                <p>Zaprojektowany od zera z myślą o intuicyjności. Koniec z topornymi oknami i skomplikowanymi ustawieniami.</p>
             </div>
         </section>
     </main>
 
+    <div id="download-modal" class="modal-overlay">
+        <div class="modal-box">
+            <span class="modal-close" id="close-modal-btn">&times;</span>
+            <h2>Wybierz wersję systemu</h2>
+            <div class="arch-container">
+                <label class="arch-card"><input type="radio" name="system-arch" value="win64" checked><span>Windows x64</span></label>
+                <label class="arch-card"><input type="radio" name="system-arch" value="win_arm64"><span>Windows ARM64</span></label>
+                <label class="arch-card"><input type="radio" name="system-arch" value="win32"><span>Windows x32</span></label>
+                <label class="arch-card"><input type="radio" name="system-arch" value="linux"><span>Linux</span></label>
+            </div>
+            <button id="submit-download-btn" class="btn-download" style="width: 100%;">Pobierz teraz</button>
+        </div>
+    </div>
+
     <footer>
-        <p id="footer-text">&copy; 2026 Melon Client. Wszelkie prawa zastrzeżone.</p>
+        <p>&copy; 2026 Melon Client. Strona zainspirowana stylem Modrinth.</p>
     </footer>
 
     <script>
-        const discordLinks = {
-            pl: 'https://discord.gg/GjPypUGW6',
-            eng: 'https://discord.gg/6HbSsbtvJ'
-        };
+        const modal = document.getElementById('download-modal');
+        const openModalBtns = document.querySelectorAll('.open-modal-btn');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const submitDownloadBtn = document.getElementById('submit-download-btn');
 
-        const translations = {
-            pl: {
-                title: "Melon Client - Nowoczesny Launcher Minecraft",
-                navFeatures: "Funkcje",
-                navGallery: "Galeria",
-                discordText: "Dołącz",
-                heroTitle: "Nowa era rozgrywki w Minecraft",
-                heroSubtitle: "Zoptymalizowany, szybki i nowoczesny launcher stworzony z myślą o najwyższej wydajności FPS oraz stabilności.",
-                heroDownload: "Pobierz teraz",
-                featuresTitle: "Dlaczego Melon Client?",
-                galleryTitle: "Zrzuty ekranu z launchera",
-                modalTitle: "Wybierz swój system",
-                footer: "&copy; 2026 Melon Client. Wszelkie prawa zastrzeżone.",
-                f1Title: "🚀 Maksymalna wydajność i FPS",
-                f1Desc: "Nasz launcher korzysta z najnowszych metod optymalizacji gry. Automatycznie konfiguruje środowisko Java, aby wyciągnąć maksymalną ilość klatek na sekundę z każdego sprzętu.",
-                f2Title: "🎨 Nowoczesny, ciemny design",
-                f2Desc: "Zapomnij o starych, brzydkich oknach. Melon Client oferuje przejrzysty, minimalistyczny i miły dla oka interfejs, w którym znajdziesz wszystko, czego potrzebujesz.",
-                f3Title: "🛡️ Pełne bezpieczeństwo i stabilność",
-                f3Desc: "Twoje dane i konta są w pełni bezpieczne. Launcher został napisany z myślą o najwyższych standardach bezpieczeństwa, eliminując ryzyko wycieku danych czy awarii podczas gry."
-            },
-            eng: {
-                title: "Melon Client - Modern Minecraft Launcher",
-                navFeatures: "Features",
-                navGallery: "Gallery",
-                discordText: "Join",
-                heroTitle: "A new era of Minecraft gaming",
-                heroSubtitle: "Optimized, fast and modern launcher built for the highest FPS performance and rock-solid stability.",
-                heroDownload: "Download now",
-                featuresTitle: "Why Melon Client?",
-                galleryTitle: "Launcher Screenshots",
-                modalTitle: "Select your OS",
-                footer: "&copy; 2026 Melon Client. All rights reserved.",
-                f1Title: "🚀 Maximum performance and FPS",
-                f1Desc: "Our launcher uses the latest game optimization methods. It automatically configures the Java environment to squeeze the maximum FPS out of any hardware.",
-                f2Title: "🎨 Modern, dark design",
-                f2Desc: "Forget about old, ugly windows. Melon Client offers a clean, minimalist, and eye-friendly interface where you will find everything you need.",
-                f3Title: "🛡️ Complete safety and stability",
-                f3Desc: "Your data and accounts are fully secure. The launcher was written with the highest security standards in mind, eliminating the risk of data leaks or crashes."
-            }
-        };
+        openModalBtns.forEach(btn => { btn.addEventListener('click', () => { modal.style.display = 'flex'; }); });
+        closeModalBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+        window.addEventListener('click', (e) => { if (e.target === modal) { modal.style.display = 'none'; } });
 
-        function setLanguage(lang) {
-            const langOverlay = document.getElementById('lang-overlay');
-            langOverlay.style.opacity = '0';
-            setTimeout(() => langOverlay.style.display = 'none', 300);
-
-            document.getElementById('page-title').innerText = translations[lang].title;
-            document.getElementById('nav-features').innerText = translations[lang].navFeatures;
-            document.getElementById('nav-gallery').innerText = translations[lang].navGallery;
-            document.getElementById('hero-title').innerText = translations[lang].heroTitle;
-            document.getElementById('hero-subtitle').innerText = translations[lang].heroSubtitle;
-            document.getElementById('hero-download-btn').innerText = translations[lang].heroDownload;
-            document.getElementById('features-title').innerText = translations[lang].featuresTitle;
-            document.getElementById('gallery-title').innerText = translations[lang].galleryTitle;
-            document.getElementById('modal-download-title').innerText = translations[lang].modalTitle;
-            document.getElementById('footer-text').innerHTML = translations[lang].footer;
-
-            // Teksty akordeonu
-            document.getElementById('feat-1-title').innerText = translations[lang].f1Title;
-            document.getElementById('feat-1-desc').innerText = translations[lang].f1Desc;
-            document.getElementById('feat-2-title').innerText = translations[lang].f2Title;
-            document.getElementById('feat-2-desc').innerText = translations[lang].f2Desc;
-            document.getElementById('feat-3-title').innerText = translations[lang].f3Title;
-            document.getElementById('feat-3-desc').innerText = translations[lang].f3Desc;
-
-            document.querySelectorAll('.discord-link').forEach(btn => btn.href = discordLinks[lang]);
-            document.querySelectorAll('.discord-text').forEach(txt => txt.innerText = translations[lang].discordText);
-
-            document.getElementById('os-win-btn').href = `./dziekujeinfo/?os=windows&lang=${lang}`;
-            document.getElementById('os-lin-btn').href = `./dziekujeinfo/?os=linux&lang=${lang}`;
-        }
-
-        function openDownloadModal() {
-            const modal = document.getElementById('download-overlay');
-            modal.style.display = 'flex';
-            setTimeout(() => modal.style.opacity = '1', 10);
-        }
-
-        function closeDownloadModal() {
-            const modal = document.getElementById('download-overlay');
-            modal.style.opacity = '0';
-            setTimeout(() => modal.style.display = 'none', 300);
-        }
+        submitDownloadBtn.addEventListener('click', () => {
+            const selectedArch = document.querySelector('input[name="system-arch"]:checked').value;
+            modal.style.display = 'none';
+            window.location.href = './dziekujeinfo/?os=' + selectedArch;
+        });
     </script>
 </body>
 </html>
