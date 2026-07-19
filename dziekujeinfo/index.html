@@ -10,6 +10,7 @@
             --bg-color: #111213;
             --card-bg: #16171d;
             --accent-color: #1bd96a;
+            --accent-hover: #15b856;
             --discord-color: #5865F2;
             --discord-hover: #4752C4;
             --text-main: #ffffff;
@@ -27,81 +28,15 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: var(--font-family);
-            line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-        }
-
-        .language-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(11, 12, 13, 0.85);
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.3s ease;
-        }
-
-        .language-modal {
-            background-color: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 2.5rem;
-            text-align: center;
-            max-width: 480px;
-            width: 90%;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-        }
-
-        .language-modal h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            letter-spacing: -0.5px;
-        }
-
-        .lang-options {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-        }
-
-        .lang-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            cursor: pointer;
-            color: var(--text-main);
-            flex: 1;
-            transition: all 0.2s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .lang-btn:hover {
-            border-color: var(--accent-color);
-            background: rgba(27, 217, 106, 0.1);
-            transform: translateY(-3px);
-        }
-
-        .lang-flag {
-            font-size: 3rem;
-            line-height: 1;
+            justify-content: space-between;
         }
 
         header {
             background-color: rgba(17, 18, 19, 0.85);
+            backdrop-filter: blur(8px);
             border-bottom: 1px solid #2d3034;
         }
 
@@ -112,6 +47,7 @@
             padding: 1rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
+            width: 100%;
         }
 
         .logo {
@@ -124,66 +60,22 @@
             gap: 12px;
         }
 
-        .logo img {
-            height: 32px;
-            width: auto;
-            object-fit: contain;
-        }
-
         .logo span {
             color: var(--accent-color);
         }
 
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        nav a {
+        .back-btn {
             color: var(--text-muted);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.2s;
         }
 
-        nav a:hover {
+        .back-btn:hover {
             color: var(--text-main);
         }
 
-        .discord-btn {
-            background-color: var(--discord-color);
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: background-color 0.2s;
-            font-size: 0.95rem;
-        }
-
-        .discord-btn:hover {
-            background-color: var(--discord-hover);
-        }
-
-        .discord-btn.large {
-            margin-top: 2rem;
-            padding: 0.8rem 1.8rem;
-            font-size: 1.1rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
-        }
-
-        .discord-icon {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-
-        main {
+        .main-content {
             flex: 1;
             display: flex;
             align-items: center;
@@ -191,83 +83,88 @@
             padding: 2rem;
         }
 
-        .thank-you-box {
+        .thank-you-card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 3rem 2rem;
             text-align: center;
-            max-width: 800px;
+            max-width: 550px;
             width: 100%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
-        .thank-you-box h1 {
-            font-size: 2.5rem;
+        .icon-box {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 2.2rem;
             font-weight: 800;
             margin-bottom: 1rem;
             letter-spacing: -0.5px;
         }
 
-        .thank-you-box p {
-            font-size: 1.2rem;
+        p {
             color: var(--text-muted);
-        }
-
-        .code-box-container {
-            display: none;
-            margin-top: 2.5rem;
-            background-color: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.25rem 1.5rem;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            text-align: left;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-        }
-
-        .code-content {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 0.95rem;
-            color: #ffffff;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
             line-height: 1.5;
-            width: 100%;
-            overflow-x: auto;
         }
 
-        .code-prompt {
-            color: #ff5f56;
-            font-weight: bold;
-            user-select: none;
-        }
-
-        .command-text {
-            white-space: nowrap;
-            color: #ffffff;
-        }
-
-        .copy-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 0.6rem 0.8rem;
-            cursor: pointer;
+        .manual-download {
+            font-size: 0.95rem;
             color: var(--text-muted);
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+            margin-bottom: 2.5rem;
         }
 
-        .copy-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
+        .manual-download a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .manual-download a:hover {
+            text-decoration: underline;
+        }
+
+        .discord-box {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 2rem;
+        }
+
+        .discord-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .discord-btn {
+            background-color: var(--discord-color);
             color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: background-color 0.2s;
         }
 
-        .copy-btn svg {
-            width: 18px;
-            height: 18px;
+        .discord-btn:hover {
+            background-color: var(--discord-hover);
+        }
+
+        .discord-icon {
+            width: 20px;
+            height: 20px;
             fill: currentColor;
         }
 
@@ -282,76 +179,41 @@
 </head>
 <body>
 
-    <div id="lang-overlay" class="language-modal-overlay">
-        <div class="language-modal">
-            <h2>Choose your language</h2>
-            <div class="lang-options">
-                <button class="lang-btn" onclick="selectLanguage('eng')">
-                    <span class="lang-flag">🇬🇧</span>
-                    <span>English</span>
-                </button>
-                <button class="lang-btn" onclick="selectLanguage('pl')">
-                    <span class="lang-flag">🇵🇱</span>
-                    <span>POLAND</span>
-                </button>
+    <header>
+        <div class="header-container">
+            <a href="../" class="logo">Melon<span>Client</span></a>
+            <a href="../" class="back-btn" id="lnk-back">← Powrót do strony głównej</a>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="thank-you-card">
+            <div class="icon-box">🍉</div>
+            <h1 id="txt-title">Dziękujemy za pobranie!</h1>
+            <p id="txt-subtitle">Pobieranie launchera Melon Client powinno rozpocząć się automatycznie za chwilę.</p>
+            
+            <div class="manual-download" id="txt-manual-box">
+                Jeśli pobieranie się nie zaczęło, <a href="#" id="down-fallback">kliknij tutaj, aby spróbować ponownie</a>.
+            </div>
+
+            <div class="discord-box">
+                <h3 id="txt-disc-title">Dołącz do naszej społeczności!</h3>
+                <a href="#" target="_blank" class="discord-btn" id="disc-link">
+                    <svg class="discord-icon" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.72-10.93,68.6,68.6,0,0,1-10.64-5.12c.91-.67,1.81-1.37,2.67-2.1a75.22,75.22,0,0,0,72.76,0c.87.73,1.76,1.43,2.67,2.1a68.86,68.86,0,0,1-10.64,5.12,74.74,74.74,0,0,0,6.72,10.93,105.54,105.54,0,0,0,31.05-18.83C129.54,49.54,123.59,26.74,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/></svg>
+                    <span id="txt-disc-btn">Serwer Discord</span>
+                </a>
             </div>
         </div>
     </div>
 
-    <header>
-        <div class="header-container">
-            <a href="../" class="logo">
-                <img src="../logo-small.png" alt="Melon Client Logo">
-                Melon<span>Client</span>
-            </a>
-            <nav>
-                <a href="../#features" id="nav-features">Funkcje</a>
-                <a href="https://github.com/monykPL/MelonClient/" target="_blank">GitHub</a>
-                <a href="#" target="_blank" class="discord-btn discord-link">
-                    <svg class="discord-icon" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.72-10.93,68.6,68.6,0,0,1-10.64-5.12c.91-.67,1.81-1.37,2.67-2.1a75.22,75.22,0,0,0,72.76,0c.87.73,1.76,1.43,2.67,2.1a68.86,68.86,0,0,1-10.64,5.12,74.74,74.74,0,0,0,6.72,10.93,105.54,105.54,0,0,0,31.05-18.83C129.54,49.54,123.59,26.74,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/></svg>
-                    <span class="discord-text">Dołącz na serwer</span>
-                </a>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <div class="thank-you-box">
-            <h1 id="main-heading">Dziękuje za pobranie mojego clienta</h1>
-            <p id="main-subheading">Pobierając to wspierasz monykPL. Życzę Miłej Gry!</p>
-
-            <div id="code-box" class="code-box-container">
-                <div class="code-content">
-                    <span class="code-prompt">$</span>
-                    <span id="command-text" class="command-text">curl -sL https://raw.githubusercontent.com/monykPL/MelonClientSource/main/scripts/install-linux.sh | bash</span>
-                </div>
-                <button id="copy-btn" class="copy-btn" title="Skopiuj komendę">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
-                    </svg>
-                </button>
-            </div>
-
-            <br>
-            <a href="#" target="_blank" class="discord-btn large discord-link">
-                <svg class="discord-icon" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.72-10.93,68.6,68.6,0,0,1-10.64-5.12c.91-.67,1.81-1.37,2.67-2.1a75.22,75.22,0,0,0,72.76,0c.87.73,1.76,1.43,2.67,2.1a68.86,68.86,0,0,1-10.64,5.12,74.74,74.74,0,0,0,6.72,10.93,105.54,105.54,0,0,0,31.05-18.83C129.54,49.54,123.59,26.74,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/></svg>
-                <span class="discord-text">Dołącz na serwer</span>
-            </a>
-        </div>
-    </main>
-
     <footer>
-        <p id="footer-text">&copy; 2026 Melon Client. Strona zainspirowana stylem Modrinth.</p>
+        <p>&copy; 2026 Melon Client. Wszelkie prawa zastrzeżone.</p>
     </footer>
 
     <script>
-        const installerUrl = 'https://github.com/monykPL/MelonClient/releases/download/v1.5.0/MelonClient.Setup.1.5.0.exe';
-        
-        const downloadLinks = {
-            windows: installerUrl,
-            win64: installerUrl, 
-            win32: installerUrl,
-            win_arm64: installerUrl
+        const downloadFiles = {
+            windows: '../download/MelonClient-Setup.exe',
+            linux: '../download/MelonClient.AppImage'
         };
 
         const discordLinks = {
@@ -359,75 +221,55 @@
             eng: 'https://discord.gg/6HbSsbtvJ'
         };
 
-        const translations = {
+        const languages = {
             pl: {
-                title: "Dziękujemy za pobranie! - Melon Client",
-                navFeatures: "Funkcje",
-                heading: "Dziękuje za pobranie mojego clienta",
-                subheading: "Pobierając to wspierasz monykPL. Życzę Miłej Gry!",
-                copyTitle: "Skopiuj komendę",
-                discordText: "Dołącz na serwer",
-                footer: "&copy; 2026 Melon Client. Strona zainspirowana stylem Modrinth."
+                pageTitle: "Dziękujemy za pobranie! - Melon Client",
+                back: "← Powrót do strony głównej",
+                title: "Dziękujemy za pobranie!",
+                subtitle: "Pobieranie launchera Melon Client powinno rozpocząć się automatycznie za chwilę.",
+                manual: 'Jeśli pobieranie się nie zaczęło, <a href="#" id="down-fallback">kliknij tutaj, aby spróbować ponownie</a>.',
+                discTitle: "Dołącz do naszej społeczności!",
+                discBtn: "Serwer Discord"
             },
             eng: {
-                title: "Thank you for downloading! - Melon Client",
-                navFeatures: "Features",
-                heading: "Thank you for downloading my client",
-                subheading: "By downloading this you support monykPL. Have a great game!",
-                copyTitle: "Copy command",
-                discordText: "Join the server",
-                footer: "&copy; 2026 Melon Client. Site inspired by Modrinth style."
+                pageTitle: "Thanks for downloading! - Melon Client",
+                back: "← Back to home page",
+                title: "Thanks for downloading!",
+                subtitle: "Your Melon Client download should start automatically in a moment.",
+                manual: 'If the download didn\'t start, <a href="#" id="down-fallback">click here to try again</a>.',
+                discTitle: "Join our community!",
+                discBtn: "Discord Server"
             }
         };
 
-        function selectLanguage(lang) {
-            document.getElementById('lang-overlay').style.opacity = '0';
+        const urlParams = new URLSearchParams(window.location.search);
+        const userOS = urlParams.get('os') || 'windows';
+        const userLang = urlParams.get('lang') || 'pl';  
+
+        const langData = languages[userLang] || languages['pl'];
+        
+        document.title = langData.pageTitle;
+        document.getElementById('lnk-back').innerText = langData.back;
+        document.getElementById('txt-title').innerText = langData.title;
+        document.getElementById('txt-subtitle').innerText = langData.subtitle;
+        document.getElementById('txt-manual-box').innerHTML = langData.manual;
+        document.getElementById('txt-disc-title').innerText = langData.discTitle;
+        document.getElementById('txt-disc-btn').innerText = langData.discBtn;
+
+        const targetDownload = downloadFiles[userOS] || downloadFiles['windows'];
+        document.getElementById('disc-link').href = discordLinks[userLang] || discordLinks['pl'];
+        document.getElementById('down-fallback').href = targetDownload;
+
+        window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
-                document.getElementById('lang-overlay').style.display = 'none';
-            }, 300);
-
-            document.getElementById('page-title').innerText = translations[lang].title;
-            document.getElementById('nav-features').innerText = translations[lang].navFeatures;
-            document.getElementById('main-heading').innerText = translations[lang].heading;
-            document.getElementById('main-subheading').innerText = translations[lang].subheading;
-            document.getElementById('copy-btn').setAttribute('title', translations[lang].copyTitle);
-            document.getElementById('footer-text').innerHTML = translations[lang].footer;
-
-            const discordButtons = document.querySelectorAll('.discord-link');
-            const discordTexts = document.querySelectorAll('.discord-text');
-            
-            discordButtons.forEach(btn => btn.href = discordLinks[lang]);
-            discordTexts.forEach(txt => txt.innerText = translations[lang].discordText);
-
-            const urlParams = new URLSearchParams(window.location.search);
-            const selectedOS = urlParams.get('os');
-
-            const codeBox = document.getElementById('code-box');
-
-            if (selectedOS === 'linux') {
-                codeBox.style.display = 'flex';
-            } else if (downloadLinks[selectedOS] || selectedOS === 'windows') {
-                const targetLink = downloadLinks[selectedOS] || installerUrl;
                 const link = document.createElement('a');
-                link.href = targetLink;
-                link.setAttribute('download', '');
+                link.href = targetDownload;
+                link.download = '';
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-            }
-        }
-
-        const copyBtn = document.getElementById('copy-btn');
-        const commandText = document.getElementById('command-text');
-
-        copyBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText(commandText.innerText);
-            copyBtn.style.color = '#1bd96a';
-            setTimeout(() => {
-                copyBtn.style.color = '';
-            }, 2000);
+            }, 1000);
         });
     </script>
-
 </body>
 </html>
