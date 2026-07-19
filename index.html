@@ -1,99 +1,527 @@
 <!DOCTYPE html>
-<html lang="pl" data-theme="dark">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WyspaMonyka</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <title id="page-title">Melon Client - Nowoczesny Launcher Minecraft</title>
+    <style>
+        :root {
+            --bg-color: #111213;
+            --card-bg: #16171d;
+            --accent-color: #1bd96a;
+            --accent-hover: #15b856;
+            --discord-color: #5865F2;
+            --discord-hover: #4752C4;
+            --text-main: #ffffff;
+            --text-muted: #a3a3a3;
+            --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 12, 13, 0.85);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            max-width: 480px;
+            width: 90%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            position: relative;
+        }
+
+        .modal h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .modal-options {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            color: var(--text-main);
+            flex: 1;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+        }
+
+        .modal-btn:hover {
+            border-color: var(--accent-color);
+            background: rgba(27, 217, 106, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .modal-btn img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .lang-flag {
+            font-size: 3rem;
+            line-height: 1;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background-color: rgba(17, 18, 19, 0.85);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #2d3034;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 32px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--text-main);
+        }
+
+        .discord-btn {
+            background-color: var(--discord-color);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .discord-btn:hover {
+            background-color: var(--discord-hover);
+        }
+
+        .discord-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        .main-download-btn {
+            background-color: var(--accent-color);
+            color: #111213;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 20px rgba(27, 217, 106, 0.2);
+        }
+
+        .main-download-btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .features-section {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .features-section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-rotator {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 16px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .gallery-section {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .gallery-section h2 {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            perspective: 1000px;
+        }
+
+        .screenshot-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .screenshot-card:hover {
+            transform: rotateX(4deg) rotateY(-4deg) translateY(-5px);
+            box-shadow: 0 20px 40px rgba(27, 217, 106, 0.15);
+        }
+
+        .screenshot-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .community-section {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, transparent, rgba(88, 101, 242, 0.05));
+        }
+
+        .discord-btn.large {
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(88, 101, 242, 0.3);
+            margin-top: 1.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
 </head>
 <body>
 
-    <div id="language-modal" class="modal-overlay">
-        <div class="modal-box">
+    <div id="lang-overlay" class="modal-overlay">
+        <div class="modal">
             <h2>Choose your language</h2>
-            <div class="lang-options">
-                <button id="lang-en" class="lang-btn">
-                    <span class="flag">🇬🇧</span>
-                    <span class="lang-label">English</span>
+            <div class="modal-options">
+                <button class="modal-btn" onclick="setLanguage('eng')">
+                    <span class="lang-flag">🇬🇧</span>
+                    <span>English</span>
                 </button>
-                <button id="lang-pl" class="lang-btn">
-                    <span class="flag">🇵🇱</span>
-                    <span class="lang-label">POLAND</span>
+                <button class="modal-btn" onclick="setLanguage('pl')">
+                    <span class="lang-flag">🇵🇱</span>
+                    <span>POLAND</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <nav class="navbar">
-        <div class="logo" id="dynamicLogo">WyspaMonyka</div>
-        
-        <div class="nav-links">
-            <a href="#" data-key="nav-home">Strona Główna</a>
-            <a href="#informacje" data-key="nav-info">Informacje</a>
-            <a href="#dziela" data-key="nav-works">Dzieła</a>
+    <div id="download-overlay" class="modal-overlay" style="display: none; opacity: 0;">
+        <div class="modal">
+            <button class="close-modal" onclick="closeDownloadModal()">&times;</button>
+            <h2 id="modal-download-title">Wybierz swój system</h2>
+            <div class="modal-options">
+                <a href="./dziekujeinfo/?os=windows" class="modal-btn" id="os-win-btn">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" alt="Windows">
+                    <span>Windows</span>
+                </a>
+                <a href="./dziekujeinfo/?os=linux" class="modal-btn" id="os-lin-btn">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux">
+                    <span>Linux</span>
+                </a>
+            </div>
         </div>
+    </div>
 
-        <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="checkbox">
-                <input type="checkbox" id="checkbox" checked />
-                <div class="slider">
-                    <span class="icon sun">☀️</span>
-                    <span class="icon moon">🌙</span>
-                </div>
-            </label>
-        </div>
-    </nav>
-
-    <header class="hero">
-        <div class="hero-content">
-            <h1>WyspaMonyka</h1>
-            <p data-key="hero-desc">witaj, na mojej stronie internetowej</p>
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <img src="logo-small.png" alt="Melon Client Logo">
+                Melon<span>Client</span>
+            </a>
+            <nav>
+                <a href="#features" id="nav-features">Funkcje</a>
+                <a href="#gallery" id="nav-gallery">Galeria</a>
+                <a href="https://github.com/monykPL/MelonClient/" target="_blank">GitHub</a>
+                <a href="#" target="_blank" class="discord-btn discord-link">
+                    <svg class="discord-icon" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.72-10.93,68.6,68.6,0,0,1-10.64-5.12c.91-.67,1.81-1.37,2.67-2.1a75.22,75.22,0,0,0,72.76,0c.87.73,1.76,1.43,2.67,2.1a68.86,68.86,0,0,1-10.64,5.12,74.74,74.74,0,0,0,6.72,10.93,105.54,105.54,0,0,0,31.05-18.83C129.54,49.54,123.59,26.74,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/></svg>
+                    <span class="discord-text">Dołącz na serwer</span>
+                </a>
+            </nav>
         </div>
     </header>
 
-    <section class="social-bar">
-        <h3 data-key="social-title">Social Media</h3>
-        <div class="social-links">
-            <a href="https://www.tiktok.com/@monyk_pl" target="_blank"><i class="fa-brands fa-tiktok"></i> Tiktok: monyk_pl</a>
-            <a href="https://www.youtube.com/@monyk_PL" target="_blank"><i class="fa-brands fa-youtube"></i> Youtube: monyk_PL</a>
-            <a href="https://github.com/monykPL" target="_blank"><i class="fa-brands fa-github"></i> Github: monykPL</a>
-            <a href="#" target="_blank"><i class="fa-brands fa-discord"></i> Discord: monykpl</a>
-        </div>
-    </section>
+    <main>
+        <section class="hero">
+            <h1 id="hero-title">Nowa era rozgrywki w Minecraft</h1>
+            <p id="hero-subtitle">Zoptymalizowany, szybki i nowoczesny launcher stworzony z myślą o najwyższej wydajności FPS oraz stabilności.</p>
+            <button class="main-download-btn" id="hero-download-btn" onclick="openDownloadModal()">Pobierz teraz</button>
+        </section>
 
-    <section id="informacje" class="about-section">
-        <div class="container">
-            <h2 data-key="history-title">Historia</h2>
-            <p data-key="history-text">
-                Witam jestem monykPL mam 21lat nie śmiało publikuje swój głos i twarz na sociale może to się potem zmieni, moje hobby od dzieciaka było robić swoje gry na kartridże lub na dyskietki ale po kilku latach już wycofało się to i były płyty, strony, sklepy itp. ale marzenie dalej te same na youtube oglądałem dużo youtuberów i moje drugie marzenie jakby tamte nie udało się to zostać popularnym youtuberem i właśnie po kilku latach w 2019 wstawiłem swój pierwszy filmik który teraz jest prywatny i tamte konto usunięte bo zawierało moje imię w nazwie ale potem odkryłem że to zło i nie mogę tak robić bo ludzie będą znać moich rodziców kuzynów i tym podobne (itp.) miałem przerwę od tych sociali ale po długim trochę czasie powróciłem na youtube wstawiając mój pierwszy filmik na drugim kanale który powstał 4 czerwca 2023 roku jak dostałem po kliku dniach tysiąc wyświetleń pod nim bardzo byłem ucieszony bo nigdy takiej liczby nie widziałem za ten widziałem na youtube/tiktok ludzie robiące gameplay i nawet grałem w te gry porzuciłem nagrywanie przez to poszedłem na robienie gier/programowanie z początku robiłem w roblox na LUA uczyłem się poradników z youtube zbytnio nie umiałem po kilku nie udanych problemach udało się pierwszy kod trenowałem dalej i umiem do tej pory ale nie robię już na rolox gier przez ten surowy regulamin na temat publikowania więc przeniosłem się na jakieś inne silniki typu JavaScript, C#, CSS, HTML itp.
-            </p>
-        </div>
-    </section>
+        <section class="features-section" id="features">
+            <h2 id="features-title">Dlaczego Melon Client?</h2>
+            <div class="feature-rotator" id="rotator-text">Maksymalna wydajność i FPS</div>
+        </section>
 
-    <section id="dziela" class="works-section">
-        <div class="container">
-            <h2 data-key="works-title">Dzieła</h2>
+        <section class="gallery-section" id="gallery">
+            <h2 id="gallery-title">Zrzuty ekranu z launchera</h2>
+            <div class="gallery-container">
+                <div class="screenshot-card"><img src="screen1.png" alt="Screenshot 1"></div>
+                <div class="screenshot-card"><img src="screen2.png" alt="Screenshot 2"></div>
+                <div class="screenshot-card"><img src="screen3.png" alt="Screenshot 3"></div>
+            </div>
+        </section>
+
+        <section class="community-section">
+            <h2 id="community-title">Masz pytania? Dołącz do nas!</h2>
+            <a href="#" target="_blank" class="discord-btn large discord-link">
+                <svg class="discord-icon" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.72-10.93,68.6,68.6,0,0,1-10.64-5.12c.91-.67,1.81-1.37,2.67-2.1a75.22,75.22,0,0,0,72.76,0c.87.73,1.76,1.43,2.67,2.1a68.86,68.86,0,0,1-10.64,5.12,74.74,74.74,0,0,0,6.72,10.93,105.54,105.54,0,0,0,31.05-18.83C129.54,49.54,123.59,26.74,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/></svg>
+                <span class="discord-text">Dołącz na serwer</span>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <p id="footer-text">&copy; 2026 Melon Client. Strona zainspirowana stylem Modrinth.</p>
+    </footer>
+
+    <script>
+        const discordLinks = {
+            pl: 'https://discord.gg/GjPypUGW6',
+            eng: 'https://discord.gg/6HbSsbtvJ'
+        };
+
+        const translations = {
+            pl: {
+                title: "Melon Client - Nowoczesny Launcher Minecraft",
+                navFeatures: "Funkcje",
+                navGallery: "Galeria",
+                discordText: "Dołącz na serwer",
+                heroTitle: "Nowa era rozgrywki w Minecraft",
+                heroSubtitle: "Zoptymalizowany, szybki i nowoczesny launcher stworzony z myślą o najwyższej wydajności FPS oraz stabilności.",
+                heroDownload: "Pobierz teraz",
+                featuresTitle: "Dlaczego Melon Client?",
+                galleryTitle: "Zrzuty ekranu z launchera",
+                communityTitle: "Masz pytania? Dołącz do nas!",
+                modalTitle: "Wybierz swój system",
+                footer: "&copy; 2026 Melon Client. Strona zainspirowana stylem Modrinth.",
+                rotator: [
+                    "🚀 Maksymalna wydajność i FPS",
+                    "🎨 Piękny, nowoczesny interfejs w stylu ciemnym",
+                    "🛡️ Pełne bezpieczeństwo i stabilność profilu",
+                    "⚡ Błyskawiczne uruchamianie gry"
+                ]
+            },
+            eng: {
+                title: "Melon Client - Modern Minecraft Launcher",
+                navFeatures: "Features",
+                navGallery: "Gallery",
+                discordText: "Join the server",
+                heroTitle: "A new era of Minecraft gaming",
+                heroSubtitle: "Optimized, fast and modern launcher built for the highest FPS performance and rock-solid stability.",
+                heroDownload: "Download now",
+                featuresTitle: "Why Melon Client?",
+                galleryTitle: "Launcher Screenshots",
+                communityTitle: "Got questions? Join us!",
+                modalTitle: "Select your OS",
+                footer: "&copy; 2026 Melon Client. Site inspired by Modrinth style.",
+                rotator: [
+                    "🚀 Maximum performance and FPS boost",
+                    "🎨 Beautiful, modern dark-themed interface",
+                    "🛡️ Complete safety and profile stability",
+                    "⚡ Lightning fast game launching"
+                ]
+            }
+        };
+
+        let currentLang = 'pl';
+        let rotatorInterval;
+
+        function setLanguage(lang) {
+            currentLang = lang;
             
-            <div class="work-item">
-                <p>
-                    1. <a href="https://monykpl.github.io/barka-licznik/" target="_blank" class="work-link">Licznik Papieskiej</a> <span data-key="barka-desc">- Strona gdzie jest licznik do godziny 21:37 z czatem i trybem imprezowym gdzie czat się resetuje co godzinę a impreza podczas barki robi migające światło więc osoby z epilepsją nie odpalać tego oraz jak wybije ta godzina 21:37 tło zmienia się z szarego na żółte i leci konfetti po bokach ekranu a w tle leci barka remix wykop pl po tej piosence tło zmienia na szare z powrotem i znika konfetti robi następnego dnia jak wybije 21:37 to samo.</span>
-                </p>
-            </div>
+            const langOverlay = document.getElementById('lang-overlay');
+            langOverlay.style.opacity = '0';
+            setTimeout(() => langOverlay.style.display = 'none', 300);
 
-            <div class="work-item">
-                <p>
-                    2. <a href="https://monykpl.github.io/MelonClient/" target="_blank" class="work-link">MelonClient</a> <span data-key="melon-desc">- Strona mojego własnego clienta minecraft MelonClient jest w fazie Beta ale da się korzystać z niego staram się go optymalizować najmocniej jak mogę żeby był najlepszym darmowym clientem pod FPS próbuje wyścignąć innych ale nie wiem czy mi się uda jeśli chcecie mnie wesprzeć możecie wejść na serwer discord który znajdzecie w zakładce "Social Media"</span>
-                </p>
-                <div class="download-container">
-                    <a href="#" class="download-btn"><i class="fa-brands fa-windows"></i> Windows</a>
-                    <a href="#" class="download-btn"><i class="fa-brands fa-linux"></i> Linux</a>
-                </div>
-            </div>
+            document.getElementById('page-title').innerText = translations[lang].title;
+            document.getElementById('nav-features').innerText = translations[lang].navFeatures;
+            document.getElementById('nav-gallery').innerText = translations[lang].navGallery;
+            document.getElementById('hero-title').innerText = translations[lang].heroTitle;
+            document.getElementById('hero-subtitle').innerText = translations[lang].heroSubtitle;
+            document.getElementById('hero-download-btn').innerText = translations[lang].heroDownload;
+            document.getElementById('features-title').innerText = translations[lang].featuresTitle;
+            document.getElementById('gallery-title').innerText = translations[lang].galleryTitle;
+            document.getElementById('community-title').innerText = translations[lang].communityTitle;
+            document.getElementById('modal-download-title').innerText = translations[lang].modalTitle;
+            document.getElementById('footer-text').innerHTML = translations[lang].footer;
 
-        </div>
-    </section>
+            document.querySelectorAll('.discord-link').forEach(btn => btn.href = discordLinks[lang]);
+            document.querySelectorAll('.discord-text').forEach(txt => txt.innerText = translations[lang].discordText);
 
-    <script src="script.js"></script>
+            document.getElementById('os-win-btn').href = `./dziekujeinfo/?os=windows&lang=${lang}`;
+            document.getElementById('os-lin-btn').href = `./dziekujeinfo/?os=linux&lang=${lang}`;
+
+            startRotator();
+        }
+
+        function openDownloadModal() {
+            const modal = document.getElementById('download-overlay');
+            modal.style.display = 'flex';
+            setTimeout(() => modal.style.opacity = '1', 10);
+        }
+
+        function closeDownloadModal() {
+            const modal = document.getElementById('download-overlay');
+            modal.style.opacity = '0';
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        function startRotator() {
+            if(rotatorInterval) clearInterval(rotatorInterval);
+            const textElement = document.getElementById('rotator-text');
+            const lines = translations[currentLang].rotator;
+            let index = 0;
+            
+            textElement.innerText = lines[index];
+            
+            rotatorInterval = setInterval(() => {
+                index = (index + 1) % lines.length;
+                textElement.style.opacity = '0';
+                setTimeout(() => {
+                    textElement.innerText = lines[index];
+                    textElement.style.opacity = '1';
+                }, 400);
+            }, 3500);
+        }
+    </script>
 </body>
 </html>
