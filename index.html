@@ -32,7 +32,6 @@
             overflow-x: hidden;
         }
 
-        /* Modale (Język i Pobieranie) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -119,7 +118,6 @@
             cursor: pointer;
         }
 
-        /* Sticky Header */
         header {
             position: sticky;
             top: 0;
@@ -173,7 +171,6 @@
             color: var(--text-main);
         }
 
-        /* Przyciski Discord */
         .discord-btn {
             background-color: var(--discord-color);
             color: #ffffff;
@@ -198,7 +195,6 @@
             fill: currentColor;
         }
 
-        /* Hero Section (Styl z image_b3adfe.png) */
         .hero {
             text-align: center;
             padding: 7rem 2rem 5rem 2rem;
@@ -242,7 +238,6 @@
             transform: translateY(-1px);
         }
 
-        /* Sekcja Cech / Rotator (Styl z image_b3adfb.png) */
         .features-section {
             max-width: 1000px;
             margin: 5rem auto;
@@ -272,7 +267,6 @@
             transition: opacity 0.4s ease;
         }
 
-        /* Galeria 3D (Styl z image_b3ae1f.png) */
         .gallery-section {
             max-width: 1200px;
             margin: 7rem auto;
@@ -321,7 +315,6 @@
             object-fit: cover;
         }
 
-        /* Dolna sekcja społeczności */
         .community-section {
             text-align: center;
             padding: 6rem 2rem;
@@ -346,7 +339,6 @@
 </head>
 <body>
 
-    <!-- 1. MODAL WYBORU JĘZYKA -->
     <div id="lang-overlay" class="modal-overlay">
         <div class="modal">
             <h2>Choose your language</h2>
@@ -363,7 +355,6 @@
         </div>
     </div>
 
-    <!-- 2. MODAL UPROSZCZONEGO WYBORU OS -->
     <div id="download-overlay" class="modal-overlay" style="display: none; opacity: 0;">
         <div class="modal">
             <button class="close-modal" onclick="closeDownloadModal()">&times;</button>
@@ -381,7 +372,6 @@
         </div>
     </div>
 
-    <!-- Sticky Header -->
     <header>
         <div class="header-container">
             <a href="#" class="logo">
@@ -400,7 +390,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <main>
         <section class="hero">
             <h1 id="hero-title">Nowa era rozgrywki w Minecraft</h1>
@@ -408,13 +397,11 @@
             <button class="main-download-btn" id="hero-download-btn" onclick="openDownloadModal()">Pobierz teraz</button>
         </section>
 
-        <!-- Sekcja Cech (Rotator) -->
         <section class="features-section" id="features">
             <h2 id="features-title">Dlaczego Melon Client?</h2>
             <div class="feature-rotator" id="rotator-text">🚀 Maksymalna wydajność i FPS</div>
         </section>
 
-        <!-- Sekcja Galerii (Trzy karty obok siebie) -->
         <section class="gallery-section" id="gallery">
             <h2 id="gallery-title">Zrzuty ekranu z launchera</h2>
             <div class="gallery-container">
@@ -424,7 +411,6 @@
             </div>
         </section>
 
-        <!-- Społeczność -->
         <section class="community-section">
             <h2 id="community-title">Masz pytania? Dołącz do nas!</h2>
             <a href="#" target="_blank" class="discord-btn large discord-link">
